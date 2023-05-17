@@ -16,13 +16,13 @@ class SplashScreenController extends GetxController {
 
   //Logic
   handleNavigation() {
-    //TODO: Check if this is the first time using the application
-    //TODO: Check if the user already logged in
-    //TODO: Check if the user is forced to logout
+    //!TODO: Check if this is the first time using the application
+    //!TODO: Check if the user already logged in
+    //!TODO: Check if the user is forced to logout
     //TEMP Implementaion
     Future.delayed(AppConstants.splashScreenTimeout).then((_) {
       Get.to(
-        () => OnBoardingGuidesScreen(),
+        () => const OnBoardingGuidesScreen(),
       );
     });
   }

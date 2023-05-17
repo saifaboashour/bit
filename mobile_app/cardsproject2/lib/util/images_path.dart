@@ -5,4 +5,5 @@ class ImagePath {
       "assets/images/instruction_manual.svg";
   static const String onlineGames = "assets/images/online_games.svg";
   static const String mobileLogin = "assets/images/mobile_login.svg";
+  static const String mobileRegister = "assets/images/mobile_register.svg";
 }

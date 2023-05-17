@@ -7,6 +7,7 @@ import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../authentication/register/register_screen_view.dart';
 import 'view/slider_page_body.dart';
 
 class OnBoardingGuidesScreen extends StatelessWidget {
@@ -19,6 +20,12 @@ class OnBoardingGuidesScreen extends StatelessWidget {
         child: OnBoardingSlider(
           headerBackgroundColor: Colors.transparent,
           finishButtonText: 'Register',
+          onFinish: () {
+            Get.offAll(
+              () => RegisterScreen(),
+              transition: Transition.noTransition,
+            );
+          },
           finishButtonTextStyle:
               TextStyles.bodyLarge.copyWith(color: Colors.white),
           skipTextButton: Text(
@@ -30,7 +37,7 @@ class OnBoardingGuidesScreen extends StatelessWidget {
             style: TextStyles.bodySmall.copyWith(color: AppColors.darkGrey),
           ),
           trailingFunction: () {
-            Get.to(
+            Get.offAll(
               () => LoginScreen(),
               transition: Transition.noTransition,
             );
