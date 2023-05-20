@@ -6,4 +6,5 @@ class ImagePath {
   static const String onlineGames = "assets/images/online_games.svg";
   static const String mobileLogin = "assets/images/mobile_login.svg";
   static const String mobileRegister = "assets/images/mobile_register.svg";
+  static const String oneTimePassword = "assets/images/one_time_password.svg";
 }

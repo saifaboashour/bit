@@ -19,4 +19,16 @@ class TextStyles {
     fontWeight: FontWeight.normal,
     fontSize: 20.0,
   );
+
+  static const TextStyle captionSmall = TextStyle(
+    fontFamily: AppConstants.fontFamily,
+    fontWeight: FontWeight.normal,
+    fontSize: 12.0,
+  );
+
+  static const TextStyle captionLarge = TextStyle(
+    fontFamily: AppConstants.fontFamily,
+    fontWeight: FontWeight.normal,
+    fontSize: 14.0,
+  );
 }

@@ -14,6 +14,8 @@ dependencies:
   get_storage: ^2.0.3 #GetX Local Storage Manager
   flutter_onboarding_slider: ^1.0.8 #Page Slider (On Boarding)
   flutter_svg: ^1.1.6 #Draw SVG Files
+  otp_text_field: ^1.1.3 #OTP Text Field
+  timer_count_down: ^2.2.2 #CountDown Timer
 
 dev_dependencies:
   flutter_test:

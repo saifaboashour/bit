@@ -1,3 +1,4 @@
+import 'package:cardsproject2/module/authentication/one_time_password/one_time_password_screen_view.dart';
 import 'package:cardsproject2/util/validators/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -44,9 +45,13 @@ class LoginController extends GetxController {
   }
 
   login() {
-    bool isValid = validateForm();
-    if (!isValid) {
-      return;
-    }
+    // bool isValid = validateForm();
+    // if (!isValid) {
+    //   return;
+    // }
+    Get.to(
+      () => OneTimePAsswordScreen(),
+      transition: Transition.noTransition,
+    );
   }
 }
