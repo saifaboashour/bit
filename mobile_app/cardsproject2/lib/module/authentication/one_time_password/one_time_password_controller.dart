@@ -1,3 +1,4 @@
+import 'package:cardsproject2/module/main_container/main_container_view.dart';
 import 'package:get/get.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 
@@ -30,9 +31,13 @@ class OneTimePasswordController extends GetxController {
   resendVerificationCode() {}
 
   verifyOtp() {
-    bool isValid = validateForm();
-    if (!isValid) {
-      return;
-    }
+    // bool isValid = validateForm();
+    // if (!isValid) {
+    //   return;
+    // }
+    Get.to(
+      () => MainContainerScreen(),
+      transition: Transition.noTransition,
+    );
   }
 }
