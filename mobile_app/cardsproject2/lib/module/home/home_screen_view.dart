@@ -1,11 +1,9 @@
 import 'package:cardsproject2/module/home/home_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../util/app_colors.dart';
 import '../../util/common_widgets.dart';
 import '../../util/images_path.dart';
-import '../../view/balance_widget.dart';
 import '../../view/custom_header.dart';
 import 'view/category_item.dart';
 

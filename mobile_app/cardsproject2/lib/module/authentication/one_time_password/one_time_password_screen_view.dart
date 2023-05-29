@@ -116,6 +116,7 @@ class OneTimePAsswordScreen extends StatelessWidget {
                 )
               : Countdown(
                   seconds: 180,
+                  controller: _oneTimePasswordController.countdownController,
                   build: (BuildContext context, double time) {
                     _oneTimePasswordController.updateReSendCountDown(time);
                     return Text(
