@@ -17,7 +17,7 @@ class CustomHeader extends StatelessWidget {
 
   final String lable;
   final String icon;
-  final String actionIcon;
+  final String? actionIcon;
   final Function() action;
 
   @override
@@ -49,14 +49,16 @@ class CustomHeader extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              InkWell(
-                onTap: action,
-                child: SvgPicture.asset(
-                  actionIcon,
-                  color: AppColors.white,
-                  height: Get.height * 0.03,
-                ),
-              ),
+              actionIcon != null
+                  ? InkWell(
+                      onTap: action,
+                      child: SvgPicture.asset(
+                        actionIcon!,
+                        color: AppColors.white,
+                        height: Get.height * 0.03,
+                      ),
+                    )
+                  : const SizedBox(),
             ],
           ),
         ),

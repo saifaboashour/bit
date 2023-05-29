@@ -1,4 +1,5 @@
 import 'package:cardsproject2/module/main_container/main_container_controller.dart';
+import 'package:cardsproject2/module/settings/settings_screen_view.dart';
 import 'package:cardsproject2/util/app_colors.dart';
 import 'package:cardsproject2/util/images_path.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../home/home_screen_view.dart';
+import '../notifications/notifications_screen_view.dart';
 import '../orders/orders_history_screen_view.dart';
 
 class MainContainerScreen extends StatelessWidget {
@@ -132,10 +134,10 @@ class MainContainerScreen extends StatelessWidget {
   }
 
   buildNotificationsScreen() {
-    return Container();
+    return NotificationsScreen();
   }
 
   buildSettingsScreen() {
-    return Container();
+    return SettingsScreen();
   }
 }
