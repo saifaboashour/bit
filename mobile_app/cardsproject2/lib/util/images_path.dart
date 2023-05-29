@@ -17,4 +17,15 @@ class ImagePath {
   static const String gamesController = "assets/images/games_controller.svg";
   static const String bill = "assets/images/bill.svg";
   static const String filter = "assets/images/filter.svg";
+  static const String changeCurrency = "assets/images/change_currency.svg";
+  static const String changeLanguage = "assets/images/change_language.svg";
+  static const String changePassword = "assets/images/change_password.svg";
+  static const String creditCard = "assets/images/credit_card.svg";
+  static const String creditHistory = "assets/images/credit_history.svg";
+  static const String editProfile = "assets/images/edit_profile.svg";
+  static const String logout = "assets/images/logout.svg";
+  static const String printer = "assets/images/printer.svg";
+  static const String privacyPolicy = "assets/images/privacy_policy.svg";
+  static const String support = "assets/images/support.svg";
+  static const String termAndCondition = "assets/images/term_and_condition.svg";
 }

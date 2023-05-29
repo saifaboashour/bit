@@ -84,12 +84,12 @@ class SettingsScreen extends StatelessWidget {
           ),
           SettingsButton(
             title: 'Edit Profile',
-            icon: ImagePath.home,
+            icon: ImagePath.editProfile,
             onTap: () {},
           ),
           SettingsButton(
             title: 'Change Password',
-            icon: ImagePath.home,
+            icon: ImagePath.changePassword,
             onTap: () {},
           ),
         ],
@@ -110,17 +110,17 @@ class SettingsScreen extends StatelessWidget {
           ),
           SettingsButton(
             title: 'Request Credit',
-            icon: ImagePath.home,
+            icon: ImagePath.creditCard,
             onTap: () {},
           ),
           SettingsButton(
             title: 'Credit History',
-            icon: ImagePath.home,
+            icon: ImagePath.creditHistory,
             onTap: () {},
           ),
           SettingsButton(
             title: 'Change Currency',
-            icon: ImagePath.home,
+            icon: ImagePath.changeCurrency,
             onTap: () {},
           ),
         ],
@@ -141,12 +141,12 @@ class SettingsScreen extends StatelessWidget {
           ),
           SettingsButton(
             title: 'Change Language',
-            icon: ImagePath.home,
+            icon: ImagePath.changeLanguage,
             onTap: () {},
           ),
           SettingsButton(
             title: 'Manage Printers',
-            icon: ImagePath.home,
+            icon: ImagePath.printer,
             onTap: () {},
           ),
         ],
@@ -167,17 +167,17 @@ class SettingsScreen extends StatelessWidget {
           ),
           SettingsButton(
             title: 'Support',
-            icon: ImagePath.home,
+            icon: ImagePath.support,
             onTap: () {},
           ),
           SettingsButton(
             title: 'Privacy Policy',
-            icon: ImagePath.home,
+            icon: ImagePath.privacyPolicy,
             onTap: () {},
           ),
           SettingsButton(
             title: 'Terms & Conditions',
-            icon: ImagePath.home,
+            icon: ImagePath.termAndCondition,
             onTap: () {},
           ),
         ],
@@ -194,7 +194,7 @@ class SettingsScreen extends StatelessWidget {
           CommonWidgets().buildVerticalSpace(space: 0.06),
           SettingsButton(
             title: 'logout',
-            icon: ImagePath.home,
+            icon: ImagePath.logout,
             onTap: () {},
           ),
           CommonWidgets().buildVerticalSpace(space: 0.02),
