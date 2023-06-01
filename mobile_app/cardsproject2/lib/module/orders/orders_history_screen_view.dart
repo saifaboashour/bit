@@ -23,6 +23,7 @@ class OrdersHistoryScreen extends StatelessWidget {
             icon: ImagePath.myOrders,
             action: () {},
             actionIcon: ImagePath.filter,
+            isBackable: false,
           ),
           buildOrdersList(),
         ],

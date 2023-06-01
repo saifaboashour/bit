@@ -60,38 +60,47 @@ class OrderItemDetailsScreen extends StatelessWidget {
                 OrderItemDetailsRow(
                   title: 'Order ID: ',
                   value: '4563',
+                  width: 0.4,
                 ),
                 OrderItemDetailsRow(
                   title: 'Operator: ',
                   value: 'Zain',
+                  width: 0.4,
                 ),
                 OrderItemDetailsRow(
                   title: 'Type: ',
                   value: 'GSM 1 JD',
+                  width: 0.4,
                 ),
                 OrderItemDetailsRow(
                   title: 'Price: ',
                   value: '1.95 JOD',
+                  width: 0.4,
                 ),
                 OrderItemDetailsRow(
                   title: 'Custom Info: ',
                   value: 'G.......',
+                  width: 0.4,
                 ),
                 OrderItemDetailsRow(
                   title: 'Device Name: ',
                   value: 'SM Samsung A23',
+                  width: 0.4,
                 ),
                 OrderItemDetailsRow(
                   title: 'Operation Date: ',
                   value: '14-01-2023',
+                  width: 0.4,
                 ),
                 OrderItemDetailsRow(
                   title: 'Operation Time: ',
                   value: '10:14 PM',
+                  width: 0.4,
                 ),
                 OrderItemDetailsRow(
                   title: 'Status: ',
                   value: 'Pending',
+                  width: 0.4,
                   valueColor: AppColors.darkGrey,
                 ),
               ],

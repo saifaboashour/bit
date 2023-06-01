@@ -1,3 +1,4 @@
+import 'package:cardsproject2/module/home/categories/categories_screen_view.dart';
 import 'package:cardsproject2/module/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,6 +6,7 @@ import '../../util/app_colors.dart';
 import '../../util/common_widgets.dart';
 import '../../util/images_path.dart';
 import '../../view/custom_header.dart';
+import 'view/categories_type_item.dart';
 import 'view/category_item.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -33,32 +35,33 @@ class HomeScreen extends StatelessWidget {
             icon: ImagePath.wallet,
             action: () {},
             actionIcon: ImagePath.plus,
+            isBackable: false,
           ),
-          buildCategoryTabs(),
-          buildSubCategoriesGrid(),
+          buildTypesTabs(),
+          buildCategoriesGrid(),
         ],
       ),
     );
   }
 
-  buildCategoryTabs() {
+  buildTypesTabs() {
     return Padding(
       padding: EdgeInsets.all(Get.width * 0.02),
       child: Row(
         children: [
-          CategoryItem(
+          CategoriesTypeItem(
             isSelected: true,
             icon: ImagePath.simCard,
             action: () {},
           ),
           CommonWidgets().buildHorizontalSpace(space: 0.02),
-          CategoryItem(
+          CategoriesTypeItem(
             isSelected: false,
             icon: ImagePath.gamesController,
             action: () {},
           ),
           CommonWidgets().buildHorizontalSpace(space: 0.02),
-          CategoryItem(
+          CategoriesTypeItem(
             isSelected: false,
             icon: ImagePath.bill,
             action: () {},
@@ -68,7 +71,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  buildSubCategoriesGrid() {
+  buildCategoriesGrid() {
     return Padding(
       padding: EdgeInsets.all(Get.width * 0.02),
       child: SizedBox(
@@ -79,17 +82,13 @@ class HomeScreen extends StatelessWidget {
             crossAxisCount: 2,
           ),
           itemCount: 9,
-          itemBuilder: (context, index) => Padding(
-            padding: EdgeInsets.all(Get.width * 0.01),
-            child: InkWell(
-              onTap: () {},
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.amber,
-                  borderRadius: BorderRadius.circular(Get.width * 0.02),
-                ),
-              ),
-            ),
+          itemBuilder: (context, index) => CategoryItem(
+            onTap: () {
+              Get.to(
+                () => CategoriesScreen(),
+                transition: Transition.noTransition,
+              );
+            },
           ),
         ),
       ),

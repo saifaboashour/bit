@@ -1,37 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
-import '../../../util/app_colors.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem({
-    required this.icon,
-    required this.action,
-    required this.isSelected,
     super.key,
+    required this.onTap,
   });
 
-  final String icon;
-  final Function() action;
-  final bool isSelected;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: action,
-      child: Container(
-        height: Get.height * 0.07,
-        width: Get.height * 0.07,
-        decoration: BoxDecoration(
-          color: isSelected ? AppColors.primaryColor : AppColors.ligthGrey,
-          borderRadius: BorderRadius.circular(Get.height * 0.05),
-        ),
-        child: Center(
-          child: SvgPicture.asset(
-            icon,
-            height: Get.height * 0.035,
-            color: AppColors.white,
+    return Padding(
+      padding: EdgeInsets.all(Get.width * 0.01),
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.amber,
+            borderRadius: BorderRadius.circular(Get.width * 0.02),
           ),
         ),
       ),

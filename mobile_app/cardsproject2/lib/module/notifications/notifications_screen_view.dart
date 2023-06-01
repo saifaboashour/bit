@@ -25,6 +25,7 @@ class NotificationsScreen extends StatelessWidget {
             icon: ImagePath.notifications,
             action: () {},
             actionIcon: null,
+            isBackable: false,
           ),
           buildNotificationsList(),
         ],

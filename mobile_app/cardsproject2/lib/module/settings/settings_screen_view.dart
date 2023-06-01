@@ -26,6 +26,7 @@ class SettingsScreen extends StatelessWidget {
               icon: ImagePath.settings,
               action: () {},
               actionIcon: null,
+              isBackable: false,
             ),
             buildUserInfoCard(),
             buildAccountSettingsSection(),

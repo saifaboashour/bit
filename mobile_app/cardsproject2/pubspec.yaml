@@ -30,7 +30,7 @@ flutter:
     - assets/images/
   fonts:
     - family: ibm_plex_sans_arabic
-      fonts:
+    - fonts:
         - asset:  fonts/ibm_plex_sans_arabic.ttf
 
   

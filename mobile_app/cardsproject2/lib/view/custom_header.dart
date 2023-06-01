@@ -13,12 +13,14 @@ class CustomHeader extends StatelessWidget {
     required this.icon,
     required this.action,
     required this.actionIcon,
+    this.isBackable = true,
   });
 
   final String lable;
   final String icon;
   final String? actionIcon;
   final Function() action;
+  final bool isBackable;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,20 @@ class CustomHeader extends StatelessWidget {
           padding: EdgeInsets.all(Get.width * 0.03),
           child: Row(
             children: [
+              isBackable
+                  ? InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: const Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        color: AppColors.white,
+                      ),
+                    )
+                  : const SizedBox(),
+              isBackable
+                  ? CommonWidgets().buildHorizontalSpace(space: 0.02)
+                  : const SizedBox(),
               SvgPicture.asset(
                 icon,
                 color: AppColors.white,

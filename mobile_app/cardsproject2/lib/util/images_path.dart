@@ -28,4 +28,6 @@ class ImagePath {
   static const String privacyPolicy = "assets/images/privacy_policy.svg";
   static const String support = "assets/images/support.svg";
   static const String termAndCondition = "assets/images/term_and_condition.svg";
+  static const String whatsapp = "assets/images/whatsapp.svg";
+  static const String copy = "assets/images/copy.svg";
 }
