@@ -1,3 +1,4 @@
+import 'package:cardsproject2/module/orders/order_details/order_details_screen_view.dart';
 import 'package:cardsproject2/util/images_path.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,7 +35,14 @@ class OrdersHistoryScreen extends StatelessWidget {
       height: Get.height * 0.7,
       child: ListView.builder(
         itemCount: 5,
-        itemBuilder: (context, index) => OrderListItem(),
+        itemBuilder: (context, index) => OrderListItem(
+          onTap: () {
+            Get.to(
+              () => OrderDetailsScreen(),
+              transition: Transition.noTransition,
+            );
+          },
+        ),
       ),
     );
   }
