@@ -30,4 +30,5 @@ class ImagePath {
   static const String termAndCondition = "assets/images/term_and_condition.svg";
   static const String whatsapp = "assets/images/whatsapp.svg";
   static const String copy = "assets/images/copy.svg";
+  static const String security = "assets/images/security.svg";
 }

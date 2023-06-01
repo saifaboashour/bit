@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 
 import '../../util/images_path.dart';
 import '../../view/custom_header.dart';
+import 'account_settings/change_password_screen_view.dart';
+import 'account_settings/edit_profile_screen_view.dart';
 import 'settings_controller.dart';
 import 'view/settings_button.dart';
 
@@ -86,12 +88,22 @@ class SettingsScreen extends StatelessWidget {
           SettingsButton(
             title: 'Edit Profile',
             icon: ImagePath.editProfile,
-            onTap: () {},
+            onTap: () {
+              Get.to(
+                () => EditProfileScreen(),
+                transition: Transition.noTransition,
+              );
+            },
           ),
           SettingsButton(
             title: 'Change Password',
             icon: ImagePath.changePassword,
-            onTap: () {},
+            onTap: () {
+              Get.to(
+                () => ChangePasswordScreen(),
+                transition: Transition.noTransition,
+              );
+            },
           ),
         ],
       ),
