@@ -8,7 +8,10 @@ import '../../../util/text_styles.dart';
 class NotificationListItem extends StatelessWidget {
   const NotificationListItem({
     super.key,
+    required this.onTap,
   });
+
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class NotificationListItem extends StatelessWidget {
         vertical: Get.height * 0.005,
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: onTap,
         child: Container(
           decoration: BoxDecoration(
             color: AppColors.white,
