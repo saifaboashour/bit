@@ -8,6 +8,7 @@ import '../../../util/images_path.dart';
 import '../../../view/buttons/primary_button.dart';
 import '../../../view/custom_header.dart';
 import '../orders_controller.dart';
+import 'view/order_item_details_row.dart';
 
 class OrderItemDetailsScreen extends StatelessWidget {
   OrderItemDetailsScreen({
@@ -55,134 +56,43 @@ class OrderItemDetailsScreen extends StatelessWidget {
             CommonWidgets().buildHorizontalSpace(space: 0.02),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      'Order ID: ',
-                      style: TextStyles.captionLarge.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const Text(
-                      '4563',
-                      style: TextStyles.captionLarge,
-                    ),
-                  ],
+              children: const [
+                OrderItemDetailsRow(
+                  title: 'Order ID: ',
+                  value: '4563',
                 ),
-                Row(
-                  children: [
-                    Text(
-                      'Operator: ',
-                      style: TextStyles.captionLarge.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const Text(
-                      'Zain',
-                      style: TextStyles.captionLarge,
-                    ),
-                  ],
+                OrderItemDetailsRow(
+                  title: 'Operator: ',
+                  value: 'Zain',
                 ),
-                Row(
-                  children: [
-                    Text(
-                      'Type: ',
-                      style: TextStyles.captionLarge.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const Text(
-                      'GSM 1 JD',
-                      style: TextStyles.captionLarge,
-                    ),
-                  ],
+                OrderItemDetailsRow(
+                  title: 'Type: ',
+                  value: 'GSM 1 JD',
                 ),
-                Row(
-                  children: [
-                    Text(
-                      'Price: ',
-                      style: TextStyles.captionLarge.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const Text(
-                      '1.95 JOD',
-                      style: TextStyles.captionLarge,
-                    ),
-                  ],
+                OrderItemDetailsRow(
+                  title: 'Price: ',
+                  value: '1.95 JOD',
                 ),
-                Row(
-                  children: [
-                    Text(
-                      'Custom Info: ',
-                      style: TextStyles.captionLarge.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const Text(
-                      'G.......',
-                      style: TextStyles.captionLarge,
-                    ),
-                  ],
+                OrderItemDetailsRow(
+                  title: 'Custom Info: ',
+                  value: 'G.......',
                 ),
-                Row(
-                  children: [
-                    Text(
-                      'Device Name: ',
-                      style: TextStyles.captionLarge.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const Text(
-                      'SM Samsung A23',
-                      style: TextStyles.captionLarge,
-                    ),
-                  ],
+                OrderItemDetailsRow(
+                  title: 'Device Name: ',
+                  value: 'SM Samsung A23',
                 ),
-                Row(
-                  children: [
-                    Text(
-                      'Operation Date: ',
-                      style: TextStyles.captionLarge.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const Text(
-                      '14-01-2023',
-                      style: TextStyles.captionLarge,
-                    ),
-                  ],
+                OrderItemDetailsRow(
+                  title: 'Operation Date: ',
+                  value: '14-01-2023',
                 ),
-                Row(
-                  children: [
-                    Text(
-                      'Operation Time: ',
-                      style: TextStyles.captionLarge.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const Text(
-                      '10:14 PM',
-                      style: TextStyles.captionLarge,
-                    ),
-                  ],
+                OrderItemDetailsRow(
+                  title: 'Operation Time: ',
+                  value: '10:14 PM',
                 ),
-                Row(
-                  children: [
-                    Text(
-                      'Status: ',
-                      style: TextStyles.captionLarge.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'Pending',
-                      style: TextStyles.captionLarge.copyWith(
-                        color: AppColors.darkGrey,
-                      ),
-                    ),
-                  ],
+                OrderItemDetailsRow(
+                  title: 'Status: ',
+                  value: 'Pending',
+                  valueColor: AppColors.darkGrey,
                 ),
               ],
             ),

@@ -56,7 +56,7 @@ class NotificationDetailsScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Text(
+            const Text(
               'Welcome to Bitaqty, Feel free to contact us anytime we willbe happy to provide the help you need in order to grow your business with us.',
               style: TextStyles.captionLarge,
             ),
