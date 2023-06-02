@@ -31,4 +31,8 @@ class ImagePath {
   static const String whatsapp = "assets/images/whatsapp.svg";
   static const String copy = "assets/images/copy.svg";
   static const String security = "assets/images/security.svg";
+  static const String bankTransfer = "assets/images/bank_transfer.svg";
+  static const String prepaid = "assets/images/prepaid.svg";
+  static const String qrScan = "assets/images/qr_scan.svg";
+  static const String sendCredit = "assets/images/send_credit.svg";
 }

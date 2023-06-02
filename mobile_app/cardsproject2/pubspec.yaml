@@ -17,6 +17,7 @@ dependencies:
   otp_text_field: ^1.1.3 #OTP Text Field
   timer_count_down: ^2.2.2 #CountDown Timer
   persistent_bottom_nav_bar: ^5.0.2 #Bottom Navigation Bar
+  dropdown_button2: ^2.1.3 #Dropdown Button
 
 dev_dependencies:
   flutter_test:

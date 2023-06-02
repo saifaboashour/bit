@@ -7,6 +7,7 @@ import '../../util/images_path.dart';
 import '../../view/custom_header.dart';
 import 'account_settings/change_password_screen_view.dart';
 import 'account_settings/edit_profile_screen_view.dart';
+import 'credit_settings/credit_request_screen_view.dart';
 import 'settings_controller.dart';
 import 'view/settings_button.dart';
 
@@ -124,7 +125,12 @@ class SettingsScreen extends StatelessWidget {
           SettingsButton(
             title: 'Request Credit',
             icon: ImagePath.creditCard,
-            onTap: () {},
+            onTap: () {
+              Get.to(
+                () => RequestCreditScreen(),
+                transition: Transition.noTransition,
+              );
+            },
           ),
           SettingsButton(
             title: 'Credit History',
