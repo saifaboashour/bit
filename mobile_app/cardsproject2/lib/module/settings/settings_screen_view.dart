@@ -7,6 +7,8 @@ import '../../util/images_path.dart';
 import '../../view/custom_header.dart';
 import 'account_settings/change_password_screen_view.dart';
 import 'account_settings/edit_profile_screen_view.dart';
+import 'app_settings/language/change_language_screen_view.dart';
+import 'app_settings/printers/manage_printers_screen_view.dart';
 import 'credit_settings/change_currency/change_currency_screen_view.dart';
 import 'credit_settings/credit_history/credit_request_history_screen_view.dart';
 import 'credit_settings/credit_request/credit_request_screen_view.dart';
@@ -173,12 +175,22 @@ class SettingsScreen extends StatelessWidget {
           SettingsButton(
             title: 'Change Language',
             icon: ImagePath.changeLanguage,
-            onTap: () {},
+            onTap: () {
+              Get.to(
+                () => const ChangeLanguageScreen(),
+                transition: Transition.noTransition,
+              );
+            },
           ),
           SettingsButton(
             title: 'Manage Printers',
             icon: ImagePath.printer,
-            onTap: () {},
+            onTap: () {
+              Get.to(
+                () => const ManagePrintersScreen(),
+                transition: Transition.noTransition,
+              );
+            },
           ),
         ],
       ),
