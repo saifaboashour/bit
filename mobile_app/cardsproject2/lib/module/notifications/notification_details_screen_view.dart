@@ -5,14 +5,14 @@ import 'package:get/get.dart';
 
 import '../../util/images_path.dart';
 import '../../view/custom_header.dart';
-import 'notifications_controller.dart';
+// import 'notifications_controller.dart';
 
 class NotificationDetailsScreen extends StatelessWidget {
-  NotificationDetailsScreen({
+  const NotificationDetailsScreen({
     super.key,
   });
 
-  final NotificationsController _notificationsController = Get.find();
+  // final NotificationsController _notificationsController = Get.find();
 
   @override
   Widget build(BuildContext context) {

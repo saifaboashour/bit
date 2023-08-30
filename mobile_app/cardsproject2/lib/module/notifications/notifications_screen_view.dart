@@ -4,16 +4,16 @@ import 'package:get/get.dart';
 import '../../util/images_path.dart';
 import '../../view/custom_header.dart';
 import 'notification_details_screen_view.dart';
-import 'notifications_controller.dart';
+// import 'notifications_controller.dart';
 import 'view/notification_listitem.dart';
 
 class NotificationsScreen extends StatelessWidget {
-  NotificationsScreen({
+  const NotificationsScreen({
     super.key,
   });
 
-  final NotificationsController _notificationsController =
-      Get.put(NotificationsController());
+  // final NotificationsController _notificationsController =
+  //     Get.put(NotificationsController());
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class NotificationsScreen extends StatelessWidget {
         itemBuilder: (context, index) => NotificationListItem(
           onTap: () {
             Get.to(
-              () => NotificationDetailsScreen(),
+              () => const NotificationDetailsScreen(),
               transition: Transition.noTransition,
             );
           },

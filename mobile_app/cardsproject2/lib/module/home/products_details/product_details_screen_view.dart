@@ -1,22 +1,20 @@
-import 'package:cardsproject2/util/text_styles.dart';
 import 'package:cardsproject2/view/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../util/app_colors.dart';
 import '../../../util/common_widgets.dart';
 import '../../../util/images_path.dart';
 import '../../../view/custom_header.dart';
 import '../../../view/text_fields/quantity_field.dart';
 import '../../orders/order_details/view/order_item_details_row.dart';
-import '../home_controller.dart';
+// import '../home_controller.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  ProductDetailsScreen({
+  const ProductDetailsScreen({
     super.key,
   });
 
-  final HomeController _homeController = Get.find();
+  // final HomeController _homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {

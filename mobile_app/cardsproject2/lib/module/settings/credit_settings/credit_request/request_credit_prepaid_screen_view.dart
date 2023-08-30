@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../util/images_path.dart';
-import '../../../view/buttons/primary_button.dart';
-import '../../../view/custom_header.dart';
-import '../../../view/text_fields/basic_textfield.dart';
+import '../../../../util/images_path.dart';
+import '../../../../view/buttons/primary_button.dart';
+import '../../../../view/custom_header.dart';
+import '../../../../view/text_fields/basic_textfield.dart';
 import 'credit_settings_controller.dart';
 
 class RequestCreditPrepaidScreen extends StatelessWidget {

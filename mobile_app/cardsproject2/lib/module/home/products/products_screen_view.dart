@@ -3,16 +3,16 @@ import 'package:get/get.dart';
 
 import '../../../util/images_path.dart';
 import '../../../view/custom_header.dart';
-import '../home_controller.dart';
+// import '../home_controller.dart';
 import '../products_details/product_details_screen_view.dart';
 import '../view/category_item.dart';
 
 class ProductsScreen extends StatelessWidget {
-  ProductsScreen({
+  const ProductsScreen({
     super.key,
   });
 
-  final HomeController _homeController = Get.find();
+  // final HomeController _homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class ProductsScreen extends StatelessWidget {
           itemBuilder: (context, index) => CategoryItem(
             onTap: () {
               Get.to(
-                () => ProductDetailsScreen(),
+                () => const ProductDetailsScreen(),
                 transition: Transition.noTransition,
               );
             },

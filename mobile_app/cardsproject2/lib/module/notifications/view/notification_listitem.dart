@@ -59,7 +59,7 @@ class NotificationListItem extends StatelessWidget {
                         style: TextStyles.captionLarge
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
-                      Text(
+                      const Text(
                         'Welcome to Bitaqty!',
                         style: TextStyles.captionLarge,
                       ),

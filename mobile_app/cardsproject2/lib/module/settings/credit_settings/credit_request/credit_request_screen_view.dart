@@ -1,21 +1,21 @@
-import 'package:cardsproject2/module/settings/credit_settings/request_credit_bank_transfer_screen_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../util/images_path.dart';
-import '../../../util/text_styles.dart';
-import '../../../view/custom_header.dart';
-import '../view/settings_button.dart';
-import 'credit_settings_controller.dart';
+import '../../../../util/images_path.dart';
+import '../../../../util/text_styles.dart';
+import '../../../../view/custom_header.dart';
+import '../../view/settings_button.dart';
+// import 'credit_settings_controller.dart';
+import 'request_credit_bank_transfer_screen_view.dart';
 import 'request_credit_prepaid_screen_view.dart';
+import 'transfer_credit_screen_view.dart';
 
 class RequestCreditScreen extends StatelessWidget {
-  RequestCreditScreen({
+  const RequestCreditScreen({
     super.key,
   });
 
-  final CreditSettingsController _creditSettingsController =
-      Get.put(CreditSettingsController());
+  // final CreditSettingsController _creditSettingsController =
+  //     Get.put(CreditSettingsController());
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +92,12 @@ class RequestCreditScreen extends StatelessWidget {
           SettingsButton(
             title: 'Send Credit',
             icon: ImagePath.sendCredit,
-            onTap: () {},
+            onTap: () {
+              Get.to(
+                () => const TransferCreditScreen(),
+                transition: Transition.noTransition,
+              );
+            },
           ),
         ],
       ),

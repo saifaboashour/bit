@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../util/app_colors.dart';
-import '../../../util/common_widgets.dart';
-import '../../../util/text_styles.dart';
+import '../../../../../util/app_colors.dart';
+import '../../../../../util/common_widgets.dart';
+import '../../../../../util/text_styles.dart';
 
-class OrderListItem extends StatelessWidget {
-  const OrderListItem({
+class CreditRequestListItem extends StatelessWidget {
+  const CreditRequestListItem({
     super.key,
     required this.onTap,
   });
@@ -50,17 +50,17 @@ class OrderListItem extends StatelessWidget {
                 ),
                 CommonWidgets().buildHorizontalSpace(space: 0.02),
                 SizedBox(
-                  height: Get.height * 0.07,
+                  height: Get.height * 0.08,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Order ID: ',
+                        'Transfer ID: ',
                         style: TextStyles.captionLarge
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        'Operator: ',
+                        'Amount: ',
                         style: TextStyles.captionLarge
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
@@ -69,14 +69,23 @@ class OrderListItem extends StatelessWidget {
                         style: TextStyles.captionLarge
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
+                      Text(
+                        'Status: ',
+                        style: TextStyles.captionLarge
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                 ),
                 SizedBox(
-                  height: Get.height * 0.07,
+                  height: Get.height * 0.08,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
+                      Text(
+                        'data',
+                        style: TextStyles.captionLarge,
+                      ),
                       Text(
                         'data',
                         style: TextStyles.captionLarge,

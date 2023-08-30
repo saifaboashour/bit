@@ -1,5 +1,4 @@
 import 'package:cardsproject2/util/app_colors.dart';
-import 'package:cardsproject2/util/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,15 +6,15 @@ import '../../../util/common_widgets.dart';
 import '../../../util/images_path.dart';
 import '../../../view/buttons/primary_button.dart';
 import '../../../view/custom_header.dart';
-import '../orders_controller.dart';
+// import '../orders_controller.dart';
 import 'view/order_item_details_row.dart';
 
 class OrderItemDetailsScreen extends StatelessWidget {
-  OrderItemDetailsScreen({
+  const OrderItemDetailsScreen({
     super.key,
   });
 
-  final OrdersController _ordersController = Get.find();
+  // final OrdersController _ordersController = Get.find();
 
   @override
   Widget build(BuildContext context) {

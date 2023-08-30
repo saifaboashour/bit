@@ -5,10 +5,10 @@ import 'package:get/get.dart';
 import 'splash_screen_controller.dart';
 
 class SplashScreen extends GetView<SplashScreenController> {
-  SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({Key? key}) : super(key: key);
 
-  final SplashScreenController _splashScreenController =
-      Get.put(SplashScreenController());
+  // final SplashScreenController _splashScreenController =
+  //     Get.put(SplashScreenController());
 
   @override
   Widget build(BuildContext context) {

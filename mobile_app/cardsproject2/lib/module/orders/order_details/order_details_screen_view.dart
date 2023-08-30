@@ -4,16 +4,16 @@ import 'package:get/get.dart';
 
 import '../../../util/images_path.dart';
 import '../../../view/custom_header.dart';
-import '../orders_controller.dart';
+// import '../orders_controller.dart';
 import '../view/order_listitem.dart';
 import 'order_item_details_screen_view.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
-  OrderDetailsScreen({
+  const OrderDetailsScreen({
     super.key,
   });
 
-  final OrdersController _ordersController = Get.find();
+  // final OrdersController _ordersController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class OrderDetailsScreen extends StatelessWidget {
         itemBuilder: (context, index) => OrderListItem(
           onTap: () {
             Get.to(
-              () => OrderItemDetailsScreen(),
+              () => const OrderItemDetailsScreen(),
               transition: Transition.noTransition,
             );
           },

@@ -126,18 +126,18 @@ class MainContainerScreen extends StatelessWidget {
   }
 
   buildHomeScreen() {
-    return HomeScreen();
+    return const HomeScreen();
   }
 
   buildMyOrdersScreen() {
-    return OrdersHistoryScreen();
+    return const OrdersHistoryScreen();
   }
 
   buildNotificationsScreen() {
-    return NotificationsScreen();
+    return const NotificationsScreen();
   }
 
   buildSettingsScreen() {
-    return SettingsScreen();
+    return const SettingsScreen();
   }
 }

@@ -4,15 +4,15 @@ import 'package:get/get.dart';
 
 import '../../../util/images_path.dart';
 import '../../../view/custom_header.dart';
-import '../home_controller.dart';
+// import '../home_controller.dart';
 import '../view/category_item.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  CategoriesScreen({
+  const CategoriesScreen({
     super.key,
   });
 
-  final HomeController _homeController = Get.find();
+  // final HomeController _homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class CategoriesScreen extends StatelessWidget {
           itemBuilder: (context, index) => CategoryItem(
             onTap: () {
               Get.to(
-                () => ProductsScreen(),
+                () => const ProductsScreen(),
                 transition: Transition.noTransition,
               );
             },

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
-import '../../../util/app_colors.dart';
-import '../../../util/common_widgets.dart';
-import '../../../util/images_path.dart';
-import '../../../util/text_styles.dart';
-import '../../../view/buttons/primary_button.dart';
-import '../../../view/custom_header.dart';
-import '../../../view/text_fields/basic_dropdown.dart';
-import '../../../view/text_fields/basic_textfield.dart';
+import '../../../../util/app_colors.dart';
+import '../../../../util/common_widgets.dart';
+import '../../../../util/images_path.dart';
+import '../../../../util/text_styles.dart';
+import '../../../../view/buttons/primary_button.dart';
+import '../../../../view/custom_header.dart';
+import '../../../../view/text_fields/basic_dropdown.dart';
+import '../../../../view/text_fields/basic_textfield.dart';
 import 'credit_settings_controller.dart';
 
 class RequestCreditBankTransferScreen extends StatelessWidget {

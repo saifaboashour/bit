@@ -55,7 +55,7 @@ class EditProfileScreen extends StatelessWidget {
           CommonWidgets().buildHorizontalSpace(space: 0.02),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: const [
               Text(
                 'Bitaqty Store',
                 style: TextStyles.captionLarge,

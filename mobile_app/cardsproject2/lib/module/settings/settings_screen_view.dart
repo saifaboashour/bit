@@ -7,16 +7,18 @@ import '../../util/images_path.dart';
 import '../../view/custom_header.dart';
 import 'account_settings/change_password_screen_view.dart';
 import 'account_settings/edit_profile_screen_view.dart';
-import 'credit_settings/credit_request_screen_view.dart';
-import 'settings_controller.dart';
+import 'credit_settings/change_currency/change_currency_screen_view.dart';
+import 'credit_settings/credit_history/credit_request_history_screen_view.dart';
+import 'credit_settings/credit_request/credit_request_screen_view.dart';
+// import 'settings_controller.dart';
 import 'view/settings_button.dart';
 
 class SettingsScreen extends StatelessWidget {
-  SettingsScreen({
+  const SettingsScreen({
     super.key,
   });
 
-  final SettingsController _settingsController = Get.put(SettingsController());
+  // final SettingsController _settingsController = Get.put(SettingsController());
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +61,7 @@ class SettingsScreen extends StatelessWidget {
           CommonWidgets().buildHorizontalSpace(space: 0.02),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: const [
               Text(
                 'Bitaqty Store',
                 style: TextStyles.captionLarge,
@@ -127,7 +129,7 @@ class SettingsScreen extends StatelessWidget {
             icon: ImagePath.creditCard,
             onTap: () {
               Get.to(
-                () => RequestCreditScreen(),
+                () => const RequestCreditScreen(),
                 transition: Transition.noTransition,
               );
             },
@@ -135,12 +137,22 @@ class SettingsScreen extends StatelessWidget {
           SettingsButton(
             title: 'Credit History',
             icon: ImagePath.creditHistory,
-            onTap: () {},
+            onTap: () {
+              Get.to(
+                () => const CreditRequestHistoryScreen(),
+                transition: Transition.noTransition,
+              );
+            },
           ),
           SettingsButton(
             title: 'Change Currency',
             icon: ImagePath.changeCurrency,
-            onTap: () {},
+            onTap: () {
+              Get.to(
+                () => const ChangeCurrencyScreen(),
+                transition: Transition.noTransition,
+              );
+            },
           ),
         ],
       ),

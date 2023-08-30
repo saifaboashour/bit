@@ -1,5 +1,5 @@
 import 'package:cardsproject2/module/home/categories/categories_screen_view.dart';
-import 'package:cardsproject2/module/home/home_controller.dart';
+// import 'package:cardsproject2/module/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../util/app_colors.dart';
@@ -10,11 +10,11 @@ import 'view/categories_type_item.dart';
 import 'view/category_item.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({
+  const HomeScreen({
     super.key,
   });
 
-  final HomeController _homeController = Get.put(HomeController());
+  // final HomeController _homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +85,7 @@ class HomeScreen extends StatelessWidget {
           itemBuilder: (context, index) => CategoryItem(
             onTap: () {
               Get.to(
-                () => CategoriesScreen(),
+                () => const CategoriesScreen(),
                 transition: Transition.noTransition,
               );
             },
