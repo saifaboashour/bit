@@ -13,6 +13,9 @@ import 'credit_settings/change_currency/change_currency_screen_view.dart';
 import 'credit_settings/credit_history/credit_request_history_screen_view.dart';
 import 'credit_settings/credit_request/credit_request_screen_view.dart';
 // import 'settings_controller.dart';
+import 'help/privacy_policy_screen_view.dart';
+import 'help/support_screen_view.dart';
+import 'help/terms_and_conditions_screen_view.dart';
 import 'view/settings_button.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -211,17 +214,32 @@ class SettingsScreen extends StatelessWidget {
           SettingsButton(
             title: 'Support',
             icon: ImagePath.support,
-            onTap: () {},
+            onTap: () {
+              Get.to(
+                () => const SupportScreen(),
+                transition: Transition.noTransition,
+              );
+            },
           ),
           SettingsButton(
             title: 'Privacy Policy',
             icon: ImagePath.privacyPolicy,
-            onTap: () {},
+            onTap: () {
+              Get.to(
+                () => const PrivacyPolicyScreen(),
+                transition: Transition.noTransition,
+              );
+            },
           ),
           SettingsButton(
             title: 'Terms & Conditions',
             icon: ImagePath.termAndCondition,
-            onTap: () {},
+            onTap: () {
+              Get.to(
+                () => const TermsAndConditionsScreen(),
+                transition: Transition.noTransition,
+              );
+            },
           ),
         ],
       ),
