@@ -15,9 +15,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Bitaqaty',
       theme: AppConstants.lightTheme,
-      home: const SplashScreen(),
+      home: SplashScreen(),
     );
   }
 }

@@ -1,7 +1,7 @@
-import 'package:cardsproject2/util/images_path.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../util/images_path.dart';
 import 'splash_screen_controller.dart';
 
 class SplashScreen extends GetView<SplashScreenController> {
