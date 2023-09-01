@@ -12,7 +12,10 @@ class AppConstants {
   );
 
   //Api Url
-  // static String baseUrl = "";
+  static String baseUrl = "";
+
+  //Http Client Config
+  static const Duration requestTimeout = Duration(seconds: 2);
 
   //App Configuration
   static const Duration splashScreenTimeout = Duration(seconds: 2);
