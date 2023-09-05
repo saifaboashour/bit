@@ -6,27 +6,23 @@ import '../../util/app_colors.dart';
 import '../../util/common_widgets.dart';
 import '../../util/images_path.dart';
 import '../../view/custom_header.dart';
+import 'home_controller.dart';
 import 'view/categories_type_item.dart';
 import 'view/category_item.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({
+  HomeScreen({
     super.key,
   });
 
-  // final HomeController _homeController = Get.put(HomeController());
+  final HomeController _homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
         children: [
-          Container(
-            // News Scrolling Bar
-            width: Get.width,
-            height: Get.height * 0.06,
-            color: Colors.amber,
-          ),
+          buildNewsSection(),
           const Divider(
             color: AppColors.darkGrey,
           ),
@@ -44,29 +40,58 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  buildNewsSection() {
+    return Container(
+      width: Get.width,
+      height: Get.height * 0.06,
+      color: Colors.amber,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 8.0),
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          controller: _homeController.newsScrollController,
+          itemCount: 15,
+          itemBuilder: (context, index) => Center(
+            child: Text(
+              'data $index',
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   buildTypesTabs() {
     return Padding(
       padding: EdgeInsets.all(Get.width * 0.02),
-      child: Row(
-        children: [
-          CategoriesTypeItem(
-            isSelected: true,
-            icon: ImagePath.simCard,
-            action: () {},
-          ),
-          CommonWidgets().buildHorizontalSpace(space: 0.02),
-          CategoriesTypeItem(
-            isSelected: false,
-            icon: ImagePath.gamesController,
-            action: () {},
-          ),
-          CommonWidgets().buildHorizontalSpace(space: 0.02),
-          CategoriesTypeItem(
-            isSelected: false,
-            icon: ImagePath.bill,
-            action: () {},
-          ),
-        ],
+      child: Obx(
+        () => Row(
+          children: [
+            CategoriesTypeItem(
+              isSelected: _homeController.selectedCategory == 0,
+              icon: ImagePath.simCard,
+              action: () {
+                _homeController.changeSelectedCategory(0);
+              },
+            ),
+            CommonWidgets().buildHorizontalSpace(space: 0.02),
+            CategoriesTypeItem(
+              isSelected: _homeController.selectedCategory == 1,
+              icon: ImagePath.gamesController,
+              action: () {
+                _homeController.changeSelectedCategory(1);
+              },
+            ),
+            CommonWidgets().buildHorizontalSpace(space: 0.02),
+            CategoriesTypeItem(
+              isSelected: _homeController.selectedCategory == 2,
+              icon: ImagePath.bill,
+              action: () {
+                _homeController.changeSelectedCategory(2);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -20,6 +20,8 @@ class CategoriesTypeItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: action,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       child: Container(
         height: Get.height * 0.07,
         width: Get.height * 0.07,
