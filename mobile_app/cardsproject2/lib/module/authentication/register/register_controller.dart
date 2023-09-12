@@ -110,6 +110,7 @@ class RegisterController extends GetxController {
     _phoneNumberErrorMessage.value = '';
     _passwordErrorMessage.value = '';
     _confirmPasswordErrorMessage.value = '';
+    _commercialNameErrorMessage.value = '';
   }
 
   bool validateForm() {
@@ -155,8 +156,10 @@ class RegisterController extends GetxController {
   showErrorMessages(HttpError<RegisterError>? errors) {
     _fullNameErrorMessage.value = errors?.details?.name ?? '';
     _addressErrorMessage.value = errors?.details?.address ?? '';
+    _emailErrorMessage.value = errors?.details?.email ?? '';
     _phoneNumberErrorMessage.value = errors?.details?.phone ?? '';
     _passwordErrorMessage.value = errors?.details?.password ?? '';
+    _commercialNameErrorMessage.value = errors?.details?.commercialName ?? '';
 
     AppSnackBars.showError('${errors?.message}');
   }
@@ -211,6 +214,8 @@ class RegisterController extends GetxController {
     if (!response.success) {
       showErrorMessages(response.error);
     } else {
+      //TODO: Pass Otp Token to OTP Screen
+      log('Otp Token => ${response.data?.otpToken}');
       Get.to(
         () => OneTimePasswordScreen(),
         transition: Transition.noTransition,

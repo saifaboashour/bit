@@ -19,6 +19,7 @@ dependencies:
   persistent_bottom_nav_bar: ^5.0.2 #Bottom Navigation Bar
   dropdown_button2: ^2.1.3 #Dropdown Button
   http: ^1.1.0 #Http Client
+  firebase_messaging: ^14.6.7 #Firebase Messaging 
 
 dev_dependencies:
   flutter_test:

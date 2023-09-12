@@ -1,20 +1,4 @@
 class RegisterError {
-  // {"message":"The name field is required. (and 9 more errors)",
-  //"errors":{
-  //"name":["The name field is required."],
-  //"email":["The email field is required."],
-  //"phone":["The phone field is required."],
-  //"password":["The password field is required."],
-  //"address":["The address field is required."],
-  //"commercial_name":["The commercial name field is required."],
-  //"fcm_token":["The fcm token field is required."],
-  //"country_id":["The country id field is required."],
-  //"state_id":["The state id field is required."],
-  //"currency_id":["The currency id field is required."
-  //]
-  //}
-  //}
-
   String? name;
   String? email;
   String? phone;
