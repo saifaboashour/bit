@@ -64,9 +64,9 @@ class SettingsScreen extends StatelessWidget {
             ),
           ),
           CommonWidgets().buildHorizontalSpace(space: 0.02),
-          Column(
+          const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               Text(
                 'Bitaqty Store',
                 style: TextStyles.captionLarge,

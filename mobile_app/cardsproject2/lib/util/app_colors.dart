@@ -6,4 +6,5 @@ class AppColors {
   static const Color ligthGrey = Color.fromRGBO(188, 188, 188, 1);
   static const Color white = Color.fromRGBO(255, 255, 255, 1);
   static const Color semiBlack = Color.fromRGBO(22, 22, 22, 1);
+  static const Color redError = Color.fromRGBO(214, 36, 36, 1);
 }

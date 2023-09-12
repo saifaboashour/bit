@@ -26,11 +26,13 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              CommonWidgets().buildVerticalSpace(space: 0.02),
               buildTitleAndSubTitle(),
               buildIllistration(),
               buildLoginForm(),
               const Spacer(),
               buildSwitchToRegister(),
+              CommonWidgets().buildVerticalSpace(space: 0.05),
             ],
           ),
         ),

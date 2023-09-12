@@ -15,8 +15,8 @@ import '../../../util/validators/formatters/time_formmaters.dart';
 import '../../../view/buttons/primary_button.dart';
 import 'one_time_password_controller.dart';
 
-class OneTimePAsswordScreen extends StatelessWidget {
-  OneTimePAsswordScreen({Key? key}) : super(key: key);
+class OneTimePasswordScreen extends StatelessWidget {
+  OneTimePasswordScreen({Key? key}) : super(key: key);
 
   final OneTimePasswordController _oneTimePasswordController =
       Get.put(OneTimePasswordController());

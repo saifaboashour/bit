@@ -12,7 +12,7 @@ class AppConstants {
   );
 
   //Api Url
-  static String baseUrl = "";
+  static String baseUrl = "https://bitaqty.adamsabbah.com";
 
   //Http Client Config
   static const Duration requestTimeout = Duration(seconds: 2);

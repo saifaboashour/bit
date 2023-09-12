@@ -50,7 +50,7 @@ class LoginController extends GetxController {
     //   return;
     // }
     Get.to(
-      () => OneTimePAsswordScreen(),
+      () => OneTimePasswordScreen(),
       transition: Transition.noTransition,
     );
   }

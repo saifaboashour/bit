@@ -74,9 +74,9 @@ class OrderListItem extends StatelessWidget {
                 ),
                 SizedBox(
                   height: Get.height * 0.07,
-                  child: Column(
+                  child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         'data',
                         style: TextStyles.captionLarge,

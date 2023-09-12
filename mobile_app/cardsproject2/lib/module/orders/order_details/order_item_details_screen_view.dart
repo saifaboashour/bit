@@ -53,9 +53,9 @@ class OrderItemDetailsScreen extends StatelessWidget {
               ),
             ),
             CommonWidgets().buildHorizontalSpace(space: 0.02),
-            Column(
+            const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 OrderItemDetailsRow(
                   title: 'Order ID: ',
                   value: '4563',

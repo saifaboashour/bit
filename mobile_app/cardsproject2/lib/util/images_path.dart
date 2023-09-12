@@ -35,4 +35,5 @@ class ImagePath {
   static const String prepaid = "assets/images/prepaid.svg";
   static const String qrScan = "assets/images/qr_scan.svg";
   static const String sendCredit = "assets/images/send_credit.svg";
+  static const String arrowDown = "assets/images/arrow_down.svg";
 }

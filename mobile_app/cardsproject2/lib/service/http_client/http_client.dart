@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cardsproject2/service/http_client/model/general_response.dart';
 import 'package:cardsproject2/service/http_client/model/http_error.dart';
 import 'package:cardsproject2/util/constants.dart';
@@ -5,18 +7,20 @@ import 'package:http/http.dart' as http;
 
 import 'http_helper.dart';
 
-class HttpClient<T> {
+class HttpClient<T, R> {
   String baseUrl = AppConstants.baseUrl;
 
   T Function(Map<String, dynamic>)? objectFromJson;
+  R Function(Map<String, dynamic>)? errorFromJson;
   List<T> Function(Map<String, dynamic>)? arrayFromJson;
 
-  HttpClient(this.objectFromJson, {this.arrayFromJson});
+  HttpClient(this.objectFromJson, this.errorFromJson, {this.arrayFromJson});
 
-  Future<GeneralResponse<T>> get(
+  Future<GeneralResponse<T, R>> get(
     String path, {
     bool isAuthRequired = true,
     Map<String, dynamic>? parameters,
+    bool isList = false,
   }) async {
     String url = baseUrl + path;
     Uri uri = Uri.parse(url).replace(queryParameters: parameters);
@@ -30,7 +34,9 @@ class HttpClient<T> {
             AppConstants.requestTimeout,
           );
 
-      return HttpHelper.handleResponse<T>(response, objectFromJson);
+      return HttpHelper.handleResponse<T, R>(
+          response, objectFromJson, errorFromJson,
+          isList: isList);
     } catch (e) {
       return GeneralResponse(
         success: false,
@@ -38,31 +44,29 @@ class HttpClient<T> {
         error: HttpError(
           code: 1337,
           message: 'Something Went Wrong. Please Contant your Provider.',
-          details: '$e',
+          localError: '$e',
         ),
       );
     }
   }
 
-  Future<GeneralResponse<T>> post(
+  Future<GeneralResponse<T, R>> post(
     String path,
-    Map<String, dynamic> requestBody, {
+    Map<String, String> requestBody, {
     bool isAuthRequired = true,
   }) async {
     String url = baseUrl + path;
     Uri uri = Uri.parse(url);
     try {
-      http.Response response = await http
-          .post(
-            uri,
-            body: requestBody,
-            headers: HttpHelper.getHeader(isAuthRequired),
-          )
-          .timeout(
-            AppConstants.requestTimeout,
-          );
+      var request = http.MultipartRequest('POST', uri)
+        ..fields.addAll(requestBody)
+        ..headers.addAll(HttpHelper.getHeader(isAuthRequired));
+      var response = await request.send();
 
-      return HttpHelper.handleResponse<T>(response, objectFromJson);
+      http.Response httpResponse = await http.Response.fromStream(response);
+
+      return HttpHelper.handleResponse<T, R>(
+          httpResponse, objectFromJson, errorFromJson);
     } catch (e) {
       return GeneralResponse(
         success: false,
@@ -70,13 +74,13 @@ class HttpClient<T> {
         error: HttpError(
           code: 1337,
           message: 'Something Went Wrong. Please Contant your Provider.',
-          details: '$e',
+          localError: '$e',
         ),
       );
     }
   }
 
-  Future<GeneralResponse<T>> put(
+  Future<GeneralResponse<T, R>> put(
     String path,
     Map<String, dynamic> requestBody, {
     bool isAuthRequired = true,
@@ -87,14 +91,15 @@ class HttpClient<T> {
       http.Response response = await http
           .put(
             uri,
-            body: requestBody,
+            body: jsonEncode(requestBody),
             headers: HttpHelper.getHeader(isAuthRequired),
           )
           .timeout(
             AppConstants.requestTimeout,
           );
 
-      return HttpHelper.handleResponse<T>(response, objectFromJson);
+      return HttpHelper.handleResponse<T, R>(
+          response, objectFromJson, errorFromJson);
     } catch (e) {
       return GeneralResponse(
         success: false,
@@ -102,13 +107,13 @@ class HttpClient<T> {
         error: HttpError(
           code: 1337,
           message: 'Something Went Wrong. Please Contant your Provider.',
-          details: '$e',
+          localError: '$e',
         ),
       );
     }
   }
 
-  Future<GeneralResponse<T>> delete(
+  Future<GeneralResponse<T, R>> delete(
     String path, {
     bool isAuthRequired = true,
   }) async {
@@ -124,7 +129,8 @@ class HttpClient<T> {
             AppConstants.requestTimeout,
           );
 
-      return HttpHelper.handleResponse<T>(response, objectFromJson);
+      return HttpHelper.handleResponse<T, R>(
+          response, objectFromJson, errorFromJson);
     } catch (e) {
       return GeneralResponse(
         success: false,
@@ -132,7 +138,7 @@ class HttpClient<T> {
         error: HttpError(
           code: 1337,
           message: 'Something Went Wrong. Please Contant your Provider.',
-          details: '$e',
+          localError: '$e',
         ),
       );
     }
