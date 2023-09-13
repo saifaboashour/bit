@@ -20,6 +20,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Padding(
             padding: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
