@@ -1,4 +1,3 @@
-import 'package:cardsproject2/module/authentication/login/login_screen_view.dart';
 import 'package:cardsproject2/util/app_colors.dart';
 import 'package:cardsproject2/util/images_path.dart';
 import 'package:cardsproject2/util/text_styles.dart';
@@ -7,7 +6,7 @@ import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../authentication/register/register_screen_view.dart';
+import '../../../service/navigation/routes.dart';
 import 'view/slider_page_body.dart';
 
 class OnBoardingGuidesScreen extends StatelessWidget {
@@ -21,10 +20,7 @@ class OnBoardingGuidesScreen extends StatelessWidget {
           headerBackgroundColor: Colors.transparent,
           finishButtonText: 'Register',
           onFinish: () {
-            Get.offAll(
-              () => RegisterScreen(),
-              transition: Transition.noTransition,
-            );
+            Get.offAllNamed(Routes.register);
           },
           finishButtonTextStyle:
               TextStyles.bodyLarge.copyWith(color: Colors.white),
@@ -37,10 +33,7 @@ class OnBoardingGuidesScreen extends StatelessWidget {
             style: TextStyles.bodySmall.copyWith(color: AppColors.darkGrey),
           ),
           trailingFunction: () {
-            Get.offAll(
-              () => LoginScreen(),
-              transition: Transition.noTransition,
-            );
+            Get.toNamed(Routes.login);
           },
           controllerColor: AppColors.primaryColor,
           finishButtonColor: AppColors.primaryColor,

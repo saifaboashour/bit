@@ -3,12 +3,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../service/navigation/routes.dart';
 import '../../../util/app_colors.dart';
 import '../../../util/common_widgets.dart';
 import '../../../util/text_styles.dart';
 import '../../../view/buttons/primary_button.dart';
 import '../../../view/text_fields/basic_textfield.dart';
-import '../login/login_screen_view.dart';
 import '../model/countries_response.dart';
 import 'register_controller.dart';
 
@@ -239,7 +239,7 @@ class RegisterScreen extends StatelessWidget {
               label: 'Country',
               items: _registerController.countryList.isNotEmpty
                   ? _registerController.countryList
-                      .map((country) => country.name ?? 'Loading...')
+                      .map((country) => country.country?.name ?? 'Loading...')
                       .toList()
                   : [],
               selectedValue: _registerController.selectedCountryValue,
@@ -258,7 +258,7 @@ class RegisterScreen extends StatelessWidget {
                   ? _registerController.countryList
                           .firstWhere(
                             (element) =>
-                                element.name ==
+                                element.country?.name ==
                                 _registerController.selectedCountryValue,
                             orElse: () => CountryResponse(states: []),
                           )
@@ -283,7 +283,7 @@ class RegisterScreen extends StatelessWidget {
                   ? _registerController.countryList
                           .firstWhere(
                             (element) =>
-                                element.name ==
+                                element.country?.name ==
                                 _registerController.selectedCountryValue,
                             orElse: () => CountryResponse(),
                           )
@@ -340,10 +340,7 @@ class RegisterScreen extends StatelessWidget {
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  Get.offAll(
-                    () => LoginScreen(),
-                    transition: Transition.noTransition,
-                  );
+                  Get.offAllNamed(Routes.login);
                 },
             ),
           ],

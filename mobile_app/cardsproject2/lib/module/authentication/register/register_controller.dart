@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:cardsproject2/module/authentication/authentication_repository.dart';
 import 'package:cardsproject2/module/authentication/model/countries_response.dart';
-import 'package:cardsproject2/module/authentication/one_time_password/one_time_password_screen_view.dart';
 import 'package:cardsproject2/module/authentication/register/model/register_error.dart';
 import 'package:cardsproject2/module/authentication/register/register_repository.dart';
 import 'package:cardsproject2/util/validators/full_name_validator.dart';
@@ -11,6 +10,7 @@ import 'package:get/get.dart';
 
 import '../../../service/http_client/model/general_response.dart';
 import '../../../service/http_client/model/http_error.dart';
+import '../../../service/navigation/routes.dart';
 import '../../../util/engagment/snackbars.dart';
 import '../../../util/validators/email_validator.dart';
 import '../../../util/validators/password_validator.dart';
@@ -174,7 +174,8 @@ class RegisterController extends GetxController {
       _selectedStateValue.value = 'Loading...';
       _selectedCurrencyValue.value = 'Loading...';
     } else {
-      _selectedCountryValue.value = countryList.first.name ?? 'Loading...';
+      _selectedCountryValue.value =
+          countryList.first.country?.name ?? 'Loading...';
 
       _selectedStateValue.value =
           countryList.first.states?.first.name ?? 'Loading...';
@@ -200,11 +201,11 @@ class RegisterController extends GetxController {
       'commercial_name': commercialNameTextFieldController.text,
       'fcm_token': 'Test FCM Token',
       'country_id':
-          '${countryList.firstWhere((element) => element.name == selectedCountryValue).id}',
+          '${countryList.firstWhere((element) => element.country?.name == selectedCountryValue).country?.id}',
       'state_id':
-          '${countryList.firstWhere((element) => element.name == selectedCountryValue).states?.firstWhere((element) => element.name == selectedStateValue).id}',
+          '${countryList.firstWhere((element) => element.country?.name == selectedCountryValue).states?.firstWhere((element) => element.name == selectedStateValue).id}',
       'currency_id':
-          '${countryList.firstWhere((element) => element.name == selectedCountryValue).currencies?.firstWhere((element) => element.name == selectedCurrencyValue).id}',
+          '${countryList.firstWhere((element) => element.country?.name == selectedCountryValue).currencies?.firstWhere((element) => element.name == selectedCurrencyValue).id}',
     };
 
     GeneralResponse<RegisterResponse, RegisterError> response =
@@ -214,12 +215,10 @@ class RegisterController extends GetxController {
     if (!response.success) {
       showErrorMessages(response.error);
     } else {
-      //TODO: Pass Otp Token to OTP Screen
       log('Otp Token => ${response.data?.otpToken}');
-      Get.to(
-        () => OneTimePasswordScreen(),
-        transition: Transition.noTransition,
-      );
+
+      Get.toNamed(Routes.oneTimePassword,
+          parameters: {'token': response.data?.otpToken ?? ''});
     }
   }
 }

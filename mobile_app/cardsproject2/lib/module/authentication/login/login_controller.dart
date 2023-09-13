@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cardsproject2/service/navigation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,7 +9,6 @@ import '../../../service/http_client/model/http_error.dart';
 import '../../../util/engagment/snackbars.dart';
 import '../../../util/validators/email_validator.dart';
 import '../../../util/validators/password_validator.dart';
-import '../one_time_password/one_time_password_screen_view.dart';
 import 'login_repository.dart';
 import 'model/login_error.dart';
 import 'model/login_response.dart';
@@ -84,12 +84,9 @@ class LoginController extends GetxController {
     if (!response.success) {
       showErrorMessages(response.error);
     } else {
-      //TODO: Pass Otp Token to OTP Screen
       log('Otp Token => ${response.data?.otpToken}');
-      Get.to(
-        () => OneTimePasswordScreen(),
-        transition: Transition.noTransition,
-      );
+      Get.toNamed(Routes.oneTimePassword,
+          parameters: {'token': response.data?.otpToken ?? ''});
     }
   }
 }

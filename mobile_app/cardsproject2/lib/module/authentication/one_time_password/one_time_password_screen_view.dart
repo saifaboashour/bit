@@ -24,6 +24,7 @@ class OneTimePasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
@@ -76,23 +77,28 @@ class OneTimePasswordScreen extends StatelessWidget {
     return Column(
       children: [
         Center(
-          child: OTPTextField(
-            length: 5,
-            width: Get.width * 0.75,
-            fieldWidth: Get.width * 0.12,
-            style: TextStyles.bodyLarge,
-            textFieldAlignment: MainAxisAlignment.spaceAround,
-            fieldStyle: FieldStyle.box,
-            controller:
-                _oneTimePasswordController.oneTimePasswordTextFieldController,
-            otpFieldStyle: OtpFieldStyle(
-              focusBorderColor: AppColors.primaryColor,
-              enabledBorderColor: AppColors.darkGrey,
+          child: Obx(
+            () => OTPTextField(
+              length: 4,
+              width: Get.width * 0.75,
+              fieldWidth: Get.width * 0.12,
+              hasError: _oneTimePasswordController.otpHasError,
+              style: TextStyles.bodyLarge,
+              textFieldAlignment: MainAxisAlignment.spaceAround,
+              fieldStyle: FieldStyle.box,
+              controller:
+                  _oneTimePasswordController.oneTimePasswordTextFieldController,
+              otpFieldStyle: OtpFieldStyle(
+                focusBorderColor: AppColors.primaryColor,
+                enabledBorderColor: AppColors.darkGrey,
+              ),
+              onCompleted: (pin) {
+                log("Completed: $pin");
+              },
+              onChanged: (pin) {
+                _oneTimePasswordController.updateOtpCodeValue(pin);
+              },
             ),
-            onCompleted: (pin) {
-              log("Completed: $pin");
-            },
-            onChanged: (pin) {},
           ),
         ),
         CommonWidgets().buildVerticalSpace(),

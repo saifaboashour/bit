@@ -1,4 +1,5 @@
 import 'package:cardsproject2/module/authentication/login/login_controller.dart';
+import 'package:cardsproject2/service/navigation/routes.dart';
 import 'package:cardsproject2/util/images_path.dart';
 import 'package:cardsproject2/view/text_fields/basic_textfield.dart';
 import 'package:flutter/gestures.dart';
@@ -9,8 +10,6 @@ import '../../../util/app_colors.dart';
 import '../../../util/common_widgets.dart';
 import '../../../util/text_styles.dart';
 import '../../../view/buttons/primary_button.dart';
-import '../forget_password/forget_password_screen_view.dart';
-import '../register/register_screen_view.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -117,10 +116,7 @@ class LoginScreen extends StatelessWidget {
         CommonWidgets().buildVerticalSpace(),
         InkWell(
           onTap: () {
-            Get.to(
-              () => ForgetPasswordScreen(),
-              transition: Transition.noTransition,
-            );
+            Get.toNamed(Routes.forgetPassword);
           },
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: Get.width * 0.05),
@@ -148,10 +144,7 @@ class LoginScreen extends StatelessWidget {
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  Get.offAll(
-                    () => RegisterScreen(),
-                    transition: Transition.noTransition,
-                  );
+                  Get.offAllNamed(Routes.register);
                 },
             ),
           ],

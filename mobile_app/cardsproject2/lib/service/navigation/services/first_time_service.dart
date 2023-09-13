@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../../local_storage_manager/local_storage_manager_app.dart';
+
 class FirstTimeService extends GetxService {
   Future<FirstTimeService> init() async => this;
 
@@ -14,7 +16,13 @@ class FirstTimeService extends GetxService {
   bool get isFirstTime => _isFirstTime.value;
 
   checkIfFirstTime() {
-    //TODO: Read Value from storage
-    _isFirstTime.value = false;
+    LocalStorageManagerApp localStorageManager = LocalStorageManagerApp();
+
+    bool isFirstTimeOpen = localStorageManager.getFirstTimeToUseTheApp();
+    if (isFirstTimeOpen) {
+      _isFirstTime.value = true;
+    } else {
+      _isFirstTime.value = false;
+    }
   }
 }

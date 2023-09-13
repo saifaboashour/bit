@@ -1,4 +1,7 @@
+import 'package:cardsproject2/module/authentication/one_time_password/model/otp_reponse.dart';
 import 'package:get/get.dart';
+
+import '../../local_storage_manager/local_storage_manager_app.dart';
 
 class AuthenticationService extends GetxService {
   Future<AuthenticationService> init() async => this;
@@ -14,16 +17,14 @@ class AuthenticationService extends GetxService {
   bool get isLoggedIn => _isLoggedIn.value;
 
   checkLoginStatus() {
-    // LocalStorageUserManager _localStorageManager = LocalStorageUserManager();
+    LocalStorageManagerApp localStorageManager = LocalStorageManagerApp();
 
-    // LoginData? user = _localStorageManager.getLoginResponseData();
+    OtpResponse? tokens = localStorageManager.getUserTokens();
 
-    // bool loginStatus = _localStorageManager.getLoginStatus();
-
-    // if (loginStatus && user != null) {
-    //   _isLoggedIn.value = true;
-    // } else {
-    //   _isLoggedIn.value = false;
-    // }
+    if (tokens != null) {
+      _isLoggedIn.value = true;
+    } else {
+      _isLoggedIn.value = false;
+    }
   }
 }
