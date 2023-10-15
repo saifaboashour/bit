@@ -16,7 +16,7 @@ class NotificationsRepository {
   Future<GeneralResponse<PaginationResponse<Notification>, dynamic>>
       getNotificationApi({required int page}) async {
     String path = '${ApiRoutes.notifications}$page';
-    final response = await _httpCountriesClient.get(path);
+    final response = await _httpCountriesClient.get(path, isPageination: true);
     return response;
   }
 }

@@ -1,17 +1,21 @@
+import 'package:cardsproject2/module/orders/model/order.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../util/app_colors.dart';
 import '../../../util/common_widgets.dart';
+import '../../../util/formatters/date_helper.dart';
 import '../../../util/text_styles.dart';
 
 class OrderListItem extends StatelessWidget {
   const OrderListItem({
     super.key,
     required this.onTap,
+    required this.order,
   });
 
   final Function() onTap;
+  final Order order;
 
   @override
   Widget build(BuildContext context) {
@@ -74,19 +78,19 @@ class OrderListItem extends StatelessWidget {
                 ),
                 SizedBox(
                   height: Get.height * 0.07,
-                  child: const Column(
+                  child:  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'data',
+                        '${order.id}',
                         style: TextStyles.captionLarge,
                       ),
                       Text(
-                        'data',
+                        order.type?.name ?? '-',
                         style: TextStyles.captionLarge,
                       ),
                       Text(
-                        'data',
+                        order.category?.name ?? '-',
                         style: TextStyles.captionLarge,
                       ),
                     ],
@@ -100,7 +104,7 @@ class OrderListItem extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Text(
-                        '14-01-2023',
+                        DateHelper().formatDateDMY(order.createdAt),
                         style: TextStyles.captionLarge
                             .copyWith(color: AppColors.darkGrey),
                       ),

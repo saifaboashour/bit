@@ -13,7 +13,8 @@ class RegisterRepository {
   Future<GeneralResponse<RegisterResponse, RegisterError>> registerApi(
       Map<String, String> body) async {
     String path = ApiRoutes.registerUrl;
-    final response = await _httpClient.post(path, body, isAuthRequired: false);
+    final response =
+        await _httpClient.post(path, body, [], isAuthRequired: false);
     return response;
   }
 }

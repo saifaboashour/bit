@@ -130,7 +130,7 @@ class MainContainerScreen extends StatelessWidget {
   }
 
   buildMyOrdersScreen() {
-    return const OrdersHistoryScreen();
+    return OrdersHistoryScreen();
   }
 
   buildNotificationsScreen() {

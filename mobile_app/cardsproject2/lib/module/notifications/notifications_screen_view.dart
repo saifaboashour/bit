@@ -1,9 +1,9 @@
+import 'package:cardsproject2/service/navigation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../util/images_path.dart';
 import '../../view/custom_header.dart';
-import 'notification_details_screen_view.dart';
 import 'notifications_controller.dart';
 import 'view/notification_listitem.dart';
 
@@ -20,12 +20,15 @@ class NotificationsScreen extends StatelessWidget {
     return SafeArea(
       child: Column(
         children: [
-          CustomHeader(
-            lable: 'Unread Notifications: 1',
-            icon: ImagePath.notifications,
-            action: () {},
-            actionIcon: null,
-            isBackable: false,
+          Obx(
+            () => CustomHeader(
+              lable:
+                  'Unread Notifications: ${_notificationsController.numberOfUnreadNotifications}',
+              icon: ImagePath.notifications,
+              action: () {},
+              actionIcon: null,
+              isBackable: false,
+            ),
           ),
           buildNotificationsList(),
         ],
@@ -35,16 +38,19 @@ class NotificationsScreen extends StatelessWidget {
 
   buildNotificationsList() {
     return SizedBox(
-      height: Get.height * 0.7,
-      child: ListView.builder(
-        itemCount: 1,
-        itemBuilder: (context, index) => NotificationListItem(
-          onTap: () {
-            Get.to(
-              () => const NotificationDetailsScreen(),
-              transition: Transition.noTransition,
-            );
-          },
+      height: Get.height * 0.77,
+      child: Obx(
+        () => ListView.builder(
+          itemCount: _notificationsController.notifications.length,
+          itemBuilder: (context, index) => NotificationListItem(
+            notification: _notificationsController.notifications[index],
+            onTap: () {
+              Get.toNamed(
+                Routes.notificationDetails,
+                arguments: _notificationsController.notifications[index],
+              );
+            },
+          ),
         ),
       ),
     );

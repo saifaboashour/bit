@@ -3,27 +3,29 @@ import 'package:cardsproject2/util/images_path.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../view/custom_header.dart';
-// import 'orders_controller.dart';
+import 'order_details/order_item_details_screen_view.dart';
+import 'orders_controller.dart';
 import 'view/order_listitem.dart';
 
 class OrdersHistoryScreen extends StatelessWidget {
-  const OrdersHistoryScreen({
+  OrdersHistoryScreen({
     super.key,
   });
 
-  // final OrdersController _ordersController = Get.put(OrdersController());
+  final OrdersController _ordersController = Get.put(OrdersController());
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
         children: [
-          CustomHeader(
-            lable: 'Number of Orders: 5',
-            icon: ImagePath.myOrders,
-            action: () {},
-            actionIcon: ImagePath.filter,
-            isBackable: false,
+          Obx(() =>  CustomHeader(
+              lable: 'Number of Orders: ${_ordersController.orders.length}',
+              icon: ImagePath.myOrders,
+              action: () {},
+              actionIcon: ImagePath.filter,
+              isBackable: false,
+            ),
           ),
           buildOrdersList(),
         ],
@@ -33,16 +35,28 @@ class OrdersHistoryScreen extends StatelessWidget {
 
   buildOrdersList() {
     return SizedBox(
-      height: Get.height * 0.7,
-      child: ListView.builder(
-        itemCount: 5,
-        itemBuilder: (context, index) => OrderListItem(
-          onTap: () {
-            Get.to(
-              () => const OrderDetailsScreen(),
-              transition: Transition.noTransition,
-            );
-          },
+      height: Get.height * 0.77,
+      child: Obx(() =>  ListView.builder(
+          itemCount: _ordersController.orders.length,
+          itemBuilder: (context, index) => OrderListItem(
+            order: _ordersController.orders[index],
+            onTap: () {
+              if(_ordersController.orders[index].type?.id == 1){
+                Get.to(
+                      () => OrderDetailsScreen(order: _ordersController.orders[index],),
+                  transition: Transition.noTransition,
+                );
+              }else{
+                Get.to(
+                    () => OrderItemDetailsScreen(
+                      order: _ordersController.orders[index],
+                      cardIndex: index,
+                    ) ,
+                  transition: Transition.noTransition,
+                );
+              }
+            },
+          ),
         ),
       ),
     );

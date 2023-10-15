@@ -1,3 +1,4 @@
+import 'package:cardsproject2/service/local_storage_manager/user_service.dart';
 import 'package:cardsproject2/service/navigation/navigation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,7 +19,8 @@ void main() async {
     DeviceOrientation.portraitUp,
   ]);
 
-  await Get.putAsync(() => AuthenticationService().init());
+  await Get.putAsync(() async => await AuthenticationService().init());
+  await Get.putAsync(() async => await UserService().init());
   await Get.putAsync(() => FirstTimeService().init());
 
   runApp(const BitaqatyApp());

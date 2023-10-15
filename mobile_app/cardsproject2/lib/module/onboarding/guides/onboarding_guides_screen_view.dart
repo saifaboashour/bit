@@ -36,7 +36,7 @@ class OnBoardingGuidesScreen extends StatelessWidget {
             Get.toNamed(Routes.login);
           },
           controllerColor: AppColors.primaryColor,
-          finishButtonColor: AppColors.primaryColor,
+          // finishButtonColor: AppColors.primaryColor,
           background: [
             SvgPicture.asset(
               ImagePath.onlineGames,

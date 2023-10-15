@@ -13,7 +13,8 @@ class LoginRepository {
   Future<GeneralResponse<LoginResponse, LoginError>> loginApi(
       Map<String, String> body) async {
     String path = ApiRoutes.loginUrl;
-    final response = await _httpClient.post(path, body, isAuthRequired: false);
+    final response =
+        await _httpClient.post(path, body, [], isAuthRequired: false);
     return response;
   }
 }

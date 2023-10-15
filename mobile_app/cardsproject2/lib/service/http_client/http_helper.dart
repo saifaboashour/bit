@@ -7,18 +7,22 @@ import 'package:cardsproject2/service/local_storage_manager/local_storage_manage
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+import '../local_storage_manager/user_service.dart';
 import '../navigation/routes.dart';
 
 class HttpHelper {
   static Map<String, String> getHeader(bool isAuthRequired) {
-    final LocalStorageManagerApp localStorageManagerApp =
-        LocalStorageManagerApp();
     Map<String, String> header = {};
-    String? token = (localStorageManagerApp.getUserTokens())?.accesstoken;
+
     header['Accept'] = 'application/json';
     header['accept-language'] = 'en';
-    if (isAuthRequired && token != null) {
-      header['Authorization'] = 'Bearer $token';
+    if (isAuthRequired) {
+      final LocalStorageManagerApp localStorageManagerApp =
+          LocalStorageManagerApp();
+      String? token = (localStorageManagerApp.getUserTokens())?.accesstoken;
+      if (token != null) {
+        header['Authorization'] = 'Bearer $token';
+      }
     } else {
       header['No-Auth'] = 'True';
       header['Access-Control-Allow-Orign'] = '*';
@@ -31,6 +35,7 @@ class HttpHelper {
     J Function(Map<String, dynamic>)? objectFromJsonAsParamerter,
     R Function(Map<String, dynamic>)? errorParser, {
     bool isList = false,
+    bool isPageination = false,
   }) async {
     GeneralResponse<J, R>? responseFromJsonGeneric(String response) {
       try {
@@ -40,6 +45,7 @@ class HttpHelper {
           objectFromJsonAsParamerter,
           errorParser,
           isList: isList,
+          isPageination: isPageination,
         );
       } catch (e) {
         log('Exception: $e');
@@ -71,13 +77,12 @@ class HttpHelper {
           LocalStorageManagerApp();
       await localStorageManagerApp.removeUserTokens();
       await localStorageManagerApp.removeUser();
-      Get.offAllNamed(Routes.login);
       return GeneralResponse(
         success: false,
         data: null,
         error: HttpError(
           code: response.statusCode,
-          message: 'Unaauthorized',
+          message: 'Unauthorized',
           details: null,
         ),
       );

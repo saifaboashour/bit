@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import '../../../../service/files_picker/view/image_picker_dialog.dart';
+import '../../../../service/local_storage_manager/user_service.dart';
 import '../../../../util/app_colors.dart';
 import '../../../../util/common_widgets.dart';
 import '../../../../util/images_path.dart';
@@ -16,7 +20,11 @@ class RequestCreditBankTransferScreen extends StatelessWidget {
     super.key,
   });
 
-  final CreditSettingsController _creditSettingsController = Get.find();
+  final CreditSettingsController _creditSettingsController =
+      Get.isRegistered<CreditSettingsController>()
+          ? Get.find()
+          : Get.put(CreditSettingsController());
+  final userService = Get.find<UserService>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +32,20 @@ class RequestCreditBankTransferScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            CustomHeader(
-              lable: '98.05 USD',
-              icon: ImagePath.wallet,
-              action: () {},
-              actionIcon: null,
+            Obx(
+              () => CustomHeader(
+                lable:
+                    '${userService.user.credit} ${userService.user.currency?.symbol}',
+                icon: ImagePath.wallet,
+                action: () {},
+                actionIcon: null,
+              ),
             ),
             buildCreditRequestBankTransferForm(),
             buildTransferImage(),
             const Spacer(),
             buildSendButton(),
+            CommonWidgets().buildVerticalSpace(space: 0.02),
           ],
         ),
       ),
@@ -54,11 +66,16 @@ class RequestCreditBankTransferScreen extends StatelessWidget {
             focusNode: null,
           ),
           CommonWidgets().buildVerticalSpace(),
-          BasicDropdown(
-            hint: 'Transfer Type',
-            items: const ['Acount Number 4985765', 'Acount Number 434636'],
-            selectedValue: 'Acount Number 4985765',
-            onChange: (value) {},
+          Obx(
+            () => BasicDropdown(
+              hint: 'Transfer Type',
+              items: _creditSettingsController.supportedAccounts
+                  .map((supportedAccount) => supportedAccount.name ?? '')
+                  .toList(),
+              selectedValue: _creditSettingsController.selectedSupportedAccount,
+              onChange:
+                  _creditSettingsController.changeSelectedSupportedAccount,
+            ),
           ),
           CommonWidgets().buildVerticalSpace(),
           BasicTextField(
@@ -86,18 +103,36 @@ class RequestCreditBankTransferScreen extends StatelessWidget {
                 TextStyles.captionLarge.copyWith(fontWeight: FontWeight.bold),
           ),
           CommonWidgets().buildVerticalSpace(),
-          Container(
-            height: Get.height * 0.2,
-            width: Get.width * 0.9,
-            decoration: BoxDecoration(
-              color: AppColors.ligthGrey,
-              borderRadius: BorderRadius.circular(Get.width * 0.01),
-            ),
-            child: Center(
-              child: SvgPicture.asset(
-                ImagePath.plus,
-                color: AppColors.darkGrey,
-                height: Get.height * 0.05,
+          InkWell(
+            onTap: () {
+              Get.dialog(ImagePickerDialog(action: (photo) {
+                _creditSettingsController.selectTransferPhotoPath(photo?.path);
+                Get.back();
+              }));
+            },
+            child: Container(
+              height: Get.height * 0.2,
+              width: Get.width * 0.9,
+              decoration: BoxDecoration(
+                color: AppColors.ligthGrey,
+                borderRadius: BorderRadius.circular(Get.width * 0.01),
+                border: Border.all(color: AppColors.darkGrey),
+              ),
+              child: Obx(
+                () => _creditSettingsController.selectedTransferPhotoPath != ''
+                    ? Image.file(
+                        File(
+                          _creditSettingsController.selectedTransferPhotoPath,
+                        ),
+                        fit: BoxFit.fill,
+                      )
+                    : Center(
+                        child: SvgPicture.asset(
+                          ImagePath.plus,
+                          color: AppColors.darkGrey,
+                          height: Get.height * 0.05,
+                        ),
+                      ),
               ),
             ),
           ),
@@ -111,7 +146,9 @@ class RequestCreditBankTransferScreen extends StatelessWidget {
       child: PrimaryButton(
         label: 'Submit',
         width: 0.9,
-        action: () {},
+        action: () {
+          _creditSettingsController.requestCreditBankTransfer();
+        },
       ),
     );
   }

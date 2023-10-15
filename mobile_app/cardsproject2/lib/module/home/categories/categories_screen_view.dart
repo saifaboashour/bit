@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../service/local_storage_manager/user_service.dart';
 import '../../../service/navigation/routes.dart';
 import '../../../util/images_path.dart';
 import '../../../view/custom_header.dart';
@@ -13,6 +14,7 @@ class CategoriesScreen extends StatelessWidget {
   });
 
   final HomeController _homeController = Get.find();
+  final userService = Get.find<UserService>();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class CategoriesScreen extends StatelessWidget {
             Obx(
               () => CustomHeader(
                 lable:
-                    '${_homeController.user.credit} ${_homeController.user.currency?.symbol}',
+                    '${userService.user.credit} ${userService.user.currency?.symbol}',
                 icon: ImagePath.wallet,
                 action: () {},
                 actionIcon: ImagePath.plus,
@@ -43,15 +45,19 @@ class CategoriesScreen extends StatelessWidget {
       child: SizedBox(
         width: Get.width,
         height: Get.height * 0.75,
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-          ),
-          itemCount: 3,
-          itemBuilder: (context, index) => CategoryItem(
-            onTap: () {
-              Get.toNamed(Routes.products);
-            },
+        child: Obx(() =>  GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+            itemCount: _homeController.subcategoriesList.length,
+            itemBuilder: (context, index) =>
+                CategoryItem(
+                  category: _homeController.subcategoriesList[index],
+              onTap: () {
+                    _homeController.getProductsDate(_homeController.subcategoriesList[index].id ?? 0);
+                Get.toNamed(Routes.products);
+              },
+            ),
           ),
         ),
       ),

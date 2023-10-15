@@ -93,7 +93,7 @@ class ChangePasswordScreen extends StatelessWidget {
         label: 'Save',
         width: 0.9,
         action: () {
-          _accountSettingsController.editProfiles();
+          _accountSettingsController.changePassword();
         },
       ),
     );

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:cardsproject2/service/http_client/model/general_response.dart';
 import 'package:cardsproject2/service/http_client/model/http_error.dart';
@@ -21,6 +22,7 @@ class HttpClient<T, R> {
     bool isAuthRequired = true,
     Map<String, dynamic>? parameters,
     bool isList = false,
+    bool isPageination = false,
   }) async {
     String url = baseUrl + path;
     Uri uri = Uri.parse(url).replace(queryParameters: parameters);
@@ -35,15 +37,19 @@ class HttpClient<T, R> {
           );
 
       return HttpHelper.handleResponse<T, R>(
-          response, objectFromJson, errorFromJson,
-          isList: isList);
+        response,
+        objectFromJson,
+        errorFromJson,
+        isList: isList,
+        isPageination: isPageination,
+      );
     } catch (e) {
       return GeneralResponse(
         success: false,
         data: null,
         error: HttpError(
           code: 1337,
-          message: 'Something Went Wrong. Please Contant your Provider.',
+          message: 'Something Went Wrong. Please Contact your Provider.',
           localError: '$e',
         ),
       );
@@ -52,7 +58,8 @@ class HttpClient<T, R> {
 
   Future<GeneralResponse<T, R>> post(
     String path,
-    Map<String, String> requestBody, {
+    Map<String, String> requestBody,
+    List<http.MultipartFile> files, {
     bool isAuthRequired = true,
   }) async {
     String url = baseUrl + path;
@@ -60,6 +67,7 @@ class HttpClient<T, R> {
     try {
       var request = http.MultipartRequest('POST', uri)
         ..fields.addAll(requestBody)
+        ..files.addAll(files)
         ..headers.addAll(HttpHelper.getHeader(isAuthRequired));
       var response = await request.send();
 
@@ -73,7 +81,7 @@ class HttpClient<T, R> {
         data: null,
         error: HttpError(
           code: 1337,
-          message: 'Something Went Wrong. Please Contant your Provider.',
+          message: 'Something Went Wrong. Please Contact your Provider.',
           localError: '$e',
         ),
       );
@@ -82,31 +90,30 @@ class HttpClient<T, R> {
 
   Future<GeneralResponse<T, R>> put(
     String path,
-    Map<String, dynamic> requestBody, {
+    Map<String, String> requestBody,
+      List<http.MultipartFile> files,{
     bool isAuthRequired = true,
   }) async {
     String url = baseUrl + path;
     Uri uri = Uri.parse(url);
     try {
-      http.Response response = await http
-          .put(
-            uri,
-            body: jsonEncode(requestBody),
-            headers: HttpHelper.getHeader(isAuthRequired),
-          )
-          .timeout(
-            AppConstants.requestTimeout,
-          );
+      var request = http.MultipartRequest('POST', uri)
+        ..fields.addAll(requestBody)
+        ..files.addAll(files)
+        ..headers.addAll(HttpHelper.getHeader(isAuthRequired));
+      var response = await request.send();
+
+      http.Response httpResponse = await http.Response.fromStream(response);
 
       return HttpHelper.handleResponse<T, R>(
-          response, objectFromJson, errorFromJson);
+          httpResponse, objectFromJson, errorFromJson);
     } catch (e) {
       return GeneralResponse(
         success: false,
         data: null,
         error: HttpError(
           code: 1337,
-          message: 'Something Went Wrong. Please Contant your Provider.',
+          message: 'Something Went Wrong. Please Contact your Provider.',
           localError: '$e',
         ),
       );
@@ -137,7 +144,7 @@ class HttpClient<T, R> {
         data: null,
         error: HttpError(
           code: 1337,
-          message: 'Something Went Wrong. Please Contant your Provider.',
+          message: 'Something Went Wrong. Please Contact your Provider.',
           localError: '$e',
         ),
       );

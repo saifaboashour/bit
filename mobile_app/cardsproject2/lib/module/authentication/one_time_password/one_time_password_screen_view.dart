@@ -26,16 +26,31 @@ class OneTimePasswordScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              buildTitleAndSubTitle(),
-              buildIllistration(),
-              buildOneTimePasswordForm(),
-            ],
-          ),
+        child: Column(
+          children: [
+            Obx(() => _oneTimePasswordController.isLoading ? Expanded(
+              flex:1,
+              child: LinearProgressIndicator(
+                color: AppColors.primaryColor,
+                backgroundColor: AppColors.primaryColor.withOpacity(0.5),
+              ),
+            ) : const SizedBox(),
+            ),
+            Expanded(
+              flex: 100,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    buildTitleAndSubTitle(),
+                    buildIllistration(),
+                    buildOneTimePasswordForm(),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

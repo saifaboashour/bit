@@ -1,9 +1,14 @@
+import 'dart:io';
+
+import 'package:cardsproject2/util/app_colors.dart';
 import 'package:cardsproject2/util/common_widgets.dart';
 import 'package:cardsproject2/view/buttons/primary_button.dart';
 import 'package:cardsproject2/view/text_fields/basic_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../service/files_picker/view/image_picker_dialog.dart';
+import '../../../service/local_storage_manager/user_service.dart';
 import '../../../util/images_path.dart';
 import '../../../util/text_styles.dart';
 import '../../../view/custom_header.dart';
@@ -16,6 +21,7 @@ class EditProfileScreen extends StatelessWidget {
 
   final AccountSettingsController _accountSettingsController =
       Get.put(AccountSettingsController());
+  final userService = Get.find<UserService>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +39,9 @@ class EditProfileScreen extends StatelessWidget {
             buildEditProfileForm(),
             const Spacer(),
             buildSaveChangesButton(),
+            CommonWidgets().buildVerticalSpace(space: 0.02),
+            buildDeleteAccountButton(),
+            CommonWidgets().buildVerticalSpace(space: 0.02),
           ],
         ),
       ),
@@ -44,25 +53,48 @@ class EditProfileScreen extends StatelessWidget {
       padding: EdgeInsets.all(Get.width * 0.02),
       child: Row(
         children: [
-          Container(
-            height: Get.width * 0.25,
-            width: Get.width * 0.25,
-            decoration: BoxDecoration(
-              color: Colors.amber,
-              borderRadius: BorderRadius.circular(Get.width * 0.01),
+          Obx(() =>  InkWell(
+            onTap:(){
+              Get.dialog(ImagePickerDialog(action: (photo) {
+                _accountSettingsController.selectProfilePhotoPath(photo?.path);
+                Get.back();
+              }));
+            },
+            child: Container(
+              height: Get.width * 0.25,
+              width: Get.width * 0.25,
+              decoration: BoxDecoration(
+                color: AppColors.ligthGrey,
+                borderRadius: BorderRadius.circular(Get.width * 0.01),
+              ),
+              child: _accountSettingsController.selectedProfilePhotoPath != '' ?
+              Image.file(
+                File(
+                  _accountSettingsController.selectedProfilePhotoPath,
+                ),
+                fit: BoxFit.fill,
+              )
+              : Image.network(
+                '${userService.user.image}',
+                errorBuilder: (context,_,e) => const SizedBox(),
+              ),
             ),
           ),
+          ),
+
           CommonWidgets().buildHorizontalSpace(space: 0.02),
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Bitaqty Store',
-                style: TextStyles.captionLarge,
+              Obx(() => Text(
+                  '${userService.user.commercialName}',
+                  style: TextStyles.captionLarge,
+                ),
               ),
-              Text(
-                'saifaboashour@bitaqty.com',
-                style: TextStyles.captionSmall,
+              Obx(() => Text(
+                  '${userService.user.email}',
+                  style: TextStyles.captionSmall,
+                ),
               ),
             ],
           ),
@@ -77,9 +109,9 @@ class EditProfileScreen extends StatelessWidget {
       child: BasicTextField(
         label: 'Full Name',
         hint: 'Full Name',
-        controller: _accountSettingsController.fullnameTextFieldController,
+        controller: _accountSettingsController.fullNameTextFieldController,
         validator: () {},
-        validationMessage: _accountSettingsController.fullnameErrorMessage,
+        validationMessage: _accountSettingsController.fullNameErrorMessage,
         focusNode: null,
       ),
     );
@@ -94,6 +126,20 @@ class EditProfileScreen extends StatelessWidget {
           _accountSettingsController.editProfiles();
         },
       ),
+    );
+  }
+
+  buildDeleteAccountButton(){
+    return InkWell(
+        onTap:(){
+
+        },
+        child: Text(
+          'Delete Account',
+          style: TextStyles.bodySmall.copyWith(
+              color: AppColors.redError,
+          ),
+        )
     );
   }
 }

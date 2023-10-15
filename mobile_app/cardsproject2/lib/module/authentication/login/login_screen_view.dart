@@ -22,20 +22,35 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CommonWidgets().buildVerticalSpace(space: 0.02),
-              buildTitleAndSubTitle(),
-              buildIllistration(),
-              buildLoginForm(),
-              const Spacer(),
-              buildSwitchToRegister(),
-              CommonWidgets().buildVerticalSpace(space: 0.05),
-            ],
-          ),
+        child: Column(
+          children: [
+             Obx(() => _loginController.isLoading ? Expanded(
+                flex:1,
+                child: LinearProgressIndicator(
+                  color: AppColors.primaryColor,
+                  backgroundColor: AppColors.primaryColor.withOpacity(0.5),
+                ),
+            ) : const SizedBox(),
+             ),
+            Expanded(
+              flex:100,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CommonWidgets().buildVerticalSpace(space: 0.02),
+                    buildTitleAndSubTitle(),
+                    buildIllistration(),
+                    buildLoginForm(),
+                    const Spacer(),
+                    buildSwitchToRegister(),
+                    CommonWidgets().buildVerticalSpace(space: 0.05),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

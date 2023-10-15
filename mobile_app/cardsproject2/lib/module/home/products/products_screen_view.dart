@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../service/local_storage_manager/user_service.dart';
 import '../../../service/navigation/routes.dart';
 import '../../../util/images_path.dart';
 import '../../../view/custom_header.dart';
 import '../home_controller.dart';
-import '../view/category_item.dart';
+import '../view/product_item.dart';
 
 class ProductsScreen extends StatelessWidget {
   ProductsScreen({
@@ -13,6 +14,7 @@ class ProductsScreen extends StatelessWidget {
   });
 
   final HomeController _homeController = Get.find();
+  final userService = Get.find<UserService>();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class ProductsScreen extends StatelessWidget {
             Obx(
               () => CustomHeader(
                 lable:
-                    '${_homeController.user.credit} ${_homeController.user.currency?.symbol}',
+                    '${userService.user.credit} ${userService.user.currency?.symbol}',
                 icon: ImagePath.wallet,
                 action: () {},
                 actionIcon: ImagePath.plus,
@@ -43,15 +45,19 @@ class ProductsScreen extends StatelessWidget {
       child: SizedBox(
         width: Get.width,
         height: Get.height * 0.75,
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-          ),
-          itemCount: 5,
-          itemBuilder: (context, index) => CategoryItem(
-            onTap: () {
-              Get.toNamed(Routes.productDetails);
-            },
+        child: Obx(() =>  GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+            itemCount: _homeController.productsList.length,
+            itemBuilder: (context, index) =>
+                ProductItem(
+              product: _homeController.productsList[index],
+              onTap: () {
+                _homeController.getProductDetailsDate(_homeController.productsList[index].id ?? 0);
+                Get.toNamed(Routes.productDetails);
+              },
+            ),
           ),
         ),
       ),

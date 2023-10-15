@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../service/local_storage_manager/user_service.dart';
+import '../../../../service/navigation/routes.dart';
 import '../../../../util/images_path.dart';
 import '../../../../util/text_styles.dart';
 import '../../../../view/custom_header.dart';
 import '../../view/settings_button.dart';
-// import 'credit_settings_controller.dart';
-import 'request_credit_bank_transfer_screen_view.dart';
-import 'request_credit_prepaid_screen_view.dart';
+import 'credit_settings_controller.dart';
+import 'request_credit_qr_code_screen_view.dart';
 import 'transfer_credit_screen_view.dart';
 
 class RequestCreditScreen extends StatelessWidget {
-  const RequestCreditScreen({
+  RequestCreditScreen({
     super.key,
   });
 
-  // final CreditSettingsController _creditSettingsController =
-  //     Get.put(CreditSettingsController());
+  final CreditSettingsController _creditSettingsController =
+      Get.put(CreditSettingsController());
+  final userService = Get.find<UserService>();
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +25,21 @@ class RequestCreditScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            CustomHeader(
-              lable: '98.05 USD',
-              icon: ImagePath.wallet,
-              action: () {},
-              actionIcon: null,
+            Obx(
+              () => CustomHeader(
+                lable:
+                    '${userService.user.credit} ${userService.user.currency?.symbol}',
+                icon: ImagePath.wallet,
+                action: () {},
+                actionIcon: null,
+              ),
             ),
             buildPaymentMethodsSection(),
-            buildSendCreditSection(),
+            Obx(
+              () => (userService.user.canGiveCredit == "1")
+                  ? buildSendCreditSection()
+                  : const SizedBox(),
+            ),
           ],
         ),
       ),
@@ -52,26 +61,23 @@ class RequestCreditScreen extends StatelessWidget {
             title: 'Bank Transfer',
             icon: ImagePath.bankTransfer,
             onTap: () {
-              Get.to(
-                RequestCreditBankTransferScreen(),
-                transition: Transition.noTransition,
-              );
+              Get.toNamed(Routes.requestCreditBankTransfer);
             },
           ),
           SettingsButton(
             title: 'Prepaid Card',
             icon: ImagePath.prepaid,
             onTap: () {
-              Get.to(
-                () => RequestCreditPrepaidScreen(),
-                transition: Transition.noTransition,
-              );
+              Get.toNamed(Routes.requestCreditPrepaid);
             },
           ),
           SettingsButton(
             title: 'QR Code',
             icon: ImagePath.qrScan,
-            onTap: () {},
+            onTap: () {
+              Get.to(() => BarcodeScannerWithScanWindow() , transition: Transition.noTransition,);
+              //Get.toNamed(Routes.requestCreditQRCode);
+            },
           ),
         ],
       ),

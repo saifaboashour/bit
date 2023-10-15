@@ -10,6 +10,7 @@ import 'package:timer_count_down/timer_controller.dart';
 
 import '../../../service/http_client/model/general_response.dart';
 import '../../../service/http_client/model/http_error.dart';
+import '../../../service/local_storage_manager/user_service.dart';
 import '../../../util/engagment/snackbars.dart';
 import 'one_time_password_repositor.dart';
 
@@ -22,7 +23,7 @@ class OneTimePasswordController extends GetxController {
     super.onInit();
   }
 
-  //Declerations
+  //Declarations
   final Rx<OtpFieldController> _oneTimePasswordTextFieldController =
       OtpFieldController().obs;
   final RxDouble _reSendCountDown = (180.0).obs;
@@ -34,6 +35,8 @@ class OneTimePasswordController extends GetxController {
   final RxString _otpCode = ''.obs;
   String _token = '';
 
+  final RxBool _isLoading = false.obs;
+
   //Getters
   OtpFieldController get oneTimePasswordTextFieldController =>
       _oneTimePasswordTextFieldController.value;
@@ -43,6 +46,8 @@ class OneTimePasswordController extends GetxController {
   bool get otpHasError => _otpHasError.value;
 
   String get otpCode => _otpCode.value;
+
+  bool get isLoading => _isLoading.value;
 
   //Logic
   updateReSendCountDown(double counter) {
@@ -86,8 +91,10 @@ class OneTimePasswordController extends GetxController {
   }
 
   verifyOtp() async {
+    _isLoading.value = true;
     bool isValid = validateForm();
     if (!isValid) {
+      _isLoading.value = false;
       return;
     }
     countdownController.pause();
@@ -102,11 +109,15 @@ class OneTimePasswordController extends GetxController {
 
     log('Response => ${response.success}');
     if (!response.success) {
+      _isLoading.value = false;
       showErrorMessages(response.error);
     } else {
+      _isLoading.value = false;
       final LocalStorageManagerApp localStorageManagerApp =
           LocalStorageManagerApp();
       await localStorageManagerApp.saveUserTokens(response.data);
+      final userService = Get.find<UserService>();
+      userService.getUserData();
       Get.offAllNamed(Routes.home);
     }
   }

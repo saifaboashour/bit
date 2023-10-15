@@ -14,7 +14,7 @@ import 'model/login_error.dart';
 import 'model/login_response.dart';
 
 class LoginController extends GetxController {
-  //Declerations
+  //Declarations
   final Rx<TextEditingController> _emailTextFieldController =
       TextEditingController().obs;
   final Rx<TextEditingController> _passwordTextFieldController =
@@ -22,6 +22,8 @@ class LoginController extends GetxController {
 
   final RxString _emailErrorMessage = ''.obs;
   final RxString _passwordErrorMessage = ''.obs;
+
+  final RxBool _isLoading = false.obs;
 
   //Getters
   TextEditingController get emailTextFieldController =>
@@ -31,6 +33,8 @@ class LoginController extends GetxController {
 
   String get emailErrorMessage => _emailErrorMessage.value;
   String get passwordErrorMessage => _passwordErrorMessage.value;
+
+  bool get isLoading => _isLoading.value;
 
   //Logic
   resetErrorMessages() {
@@ -66,8 +70,10 @@ class LoginController extends GetxController {
   }
 
   login() async {
+    _isLoading.value = true;
     bool isValid = validateForm();
     if (!isValid) {
+      _isLoading.value = false;
       return;
     }
 
@@ -83,10 +89,13 @@ class LoginController extends GetxController {
     log('Response => ${response.success}');
     if (!response.success) {
       showErrorMessages(response.error);
+      _isLoading.value = false;
     } else {
       log('Otp Token => ${response.data?.otpToken}');
+      _isLoading.value = false;
       Get.toNamed(Routes.oneTimePassword,
           parameters: {'token': response.data?.otpToken ?? ''});
     }
+
   }
 }

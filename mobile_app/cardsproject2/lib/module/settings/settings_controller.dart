@@ -2,29 +2,17 @@ import 'package:cardsproject2/service/local_storage_manager/local_storage_manage
 import 'package:cardsproject2/service/navigation/routes.dart';
 import 'package:get/get.dart';
 
-import '../authentication/model/user.dart';
-
 class SettingsController extends GetxController {
-  //Declerations
+  //Declarations
   final LocalStorageManagerApp localStorageManagerApp =
       LocalStorageManagerApp();
-  final Rx<User> _user = User().obs;
 
   //Getters
-  User get user => _user.value;
 
   //Logic
   @override
   onInit() {
     super.onInit();
-    getUserData();
-  }
-
-  getUserData() async {
-    User? localUser = localStorageManagerApp.getUser();
-    if (localUser != null) {
-      _user.value = localUser;
-    }
   }
 
   logout() async {

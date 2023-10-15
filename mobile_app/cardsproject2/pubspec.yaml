@@ -13,13 +13,20 @@ dependencies:
   get: ^4.6.5 #GetX State Manager
   get_storage: ^2.0.3 #GetX Local Storage Manager
   flutter_onboarding_slider: ^1.0.8 #Page Slider (On Boarding)
-  flutter_svg: ^1.1.6 #Draw SVG Files
+  flutter_svg: ^2.0.7 #Draw SVG Files
   otp_text_field: ^1.1.3 #OTP Text Field
   timer_count_down: ^2.2.2 #CountDown Timer
   persistent_bottom_nav_bar: ^5.0.2 #Bottom Navigation Bar
   dropdown_button2: ^2.1.3 #Dropdown Button
   http: ^1.1.0 #Http Client
-  firebase_messaging: ^14.6.7 #Firebase Messaging 
+  firebase_messaging: ^14.6.7 #Firebase Messaging
+  intl: ^0.18.1 #Internationalization and localization facilities
+  image_picker: ^1.0.4 #Image Picker
+  permission_handler: ^11.0.0 #Permission Handler
+  bluetooth_print: ^4.3.0 #Manage Bluetooth Printers
+  mobile_scanner: ^3.4.1 #QR Code Scanner (based on MLKit - add 3 to 10 MB to app size)
+  device_info_plus: ^9.0.3 #Device Info
+  shimmer: ^3.0.0 #Shimmer Loading
 
 dev_dependencies:
   flutter_test:

@@ -14,6 +14,7 @@ class CustomHeader extends StatelessWidget {
     required this.action,
     required this.actionIcon,
     this.isBackable = true,
+    this.onBack,
   });
 
   final String lable;
@@ -21,6 +22,7 @@ class CustomHeader extends StatelessWidget {
   final String? actionIcon;
   final Function() action;
   final bool isBackable;
+  final Function()? onBack;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,9 @@ class CustomHeader extends StatelessWidget {
               isBackable
                   ? InkWell(
                       onTap: () {
+                        if(onBack != null){
+                          onBack!();
+                        }
                         Get.back();
                       },
                       child: const Icon(

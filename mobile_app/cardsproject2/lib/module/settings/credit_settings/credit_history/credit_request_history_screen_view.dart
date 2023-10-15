@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../service/local_storage_manager/user_service.dart';
 import '../../../../util/images_path.dart';
 import '../../../../view/custom_header.dart';
+import 'credit_request_history_controller.dart';
 import 'view/credit_request_listitem.dart';
 
 class CreditRequestHistoryScreen extends StatelessWidget {
-  const CreditRequestHistoryScreen({
+  CreditRequestHistoryScreen({
     super.key,
   });
 
-  // final CreditSettingsController _creditSettingsController = Get.find();
+  final CreditRequestHistoryController _creditHistoryController = Get.put(CreditRequestHistoryController());
+  final userService = Get.find<UserService>();
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +21,14 @@ class CreditRequestHistoryScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            CustomHeader(
-              lable: '98.05 USD',
-              icon: ImagePath.wallet,
-              action: () {},
-              actionIcon: null,
+            Obx(
+                  () => CustomHeader(
+                lable:
+                '${userService.user.credit} ${userService.user.currency?.symbol}',
+                icon: ImagePath.wallet,
+                action: () {},
+                actionIcon: null,
+              ),
             ),
             buildCreditRequestsList(),
           ],
@@ -34,12 +40,14 @@ class CreditRequestHistoryScreen extends StatelessWidget {
   buildCreditRequestsList() {
     return SizedBox(
       height: Get.height * 0.7,
-      child: ListView.builder(
-        itemCount: 4,
-        itemBuilder: (context, index) => CreditRequestListItem(
-          onTap: () {
-            //Go to Credit Transfer History Screen
-          },
+      child: Obx(() => ListView.builder(
+          itemCount: _creditHistoryController.creditTransactions.length,
+          itemBuilder: (context, index) => CreditRequestListItem(
+            creditTransaction: _creditHistoryController.creditTransactions[index],
+            onTap: () {
+              //TODO: Go to Credit Transfer History Screen
+            },
+          ),
         ),
       ),
     );

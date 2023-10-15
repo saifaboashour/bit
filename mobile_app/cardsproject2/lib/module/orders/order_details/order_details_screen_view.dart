@@ -1,19 +1,20 @@
+import 'package:cardsproject2/module/orders/model/order.dart';
 import 'package:cardsproject2/view/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../util/images_path.dart';
 import '../../../view/custom_header.dart';
-// import '../orders_controller.dart';
-import '../view/order_listitem.dart';
 import 'order_item_details_screen_view.dart';
+import 'view/order_item_details_row.dart';
+import 'view/order_product_listitem.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
   const OrderDetailsScreen({
     super.key,
+    required this.order,
   });
 
-  // final OrdersController _ordersController = Get.find();
+  final Order order;
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +23,12 @@ class OrderDetailsScreen extends StatelessWidget {
         child: Column(
           children: [
             CustomHeader(
-              lable: 'Number of Items: 3',
+              lable: 'Order #${order.id}',
               icon: ImagePath.myOrders,
               action: () {},
               actionIcon: ImagePath.filter,
             ),
-            buildOrdersList(),
+            buildOrdersList() ,
             buildPrintButton(),
           ],
         ),
@@ -39,11 +40,15 @@ class OrderDetailsScreen extends StatelessWidget {
     return SizedBox(
       height: Get.height * 0.65,
       child: ListView.builder(
-        itemCount: 3,
-        itemBuilder: (context, index) => OrderListItem(
+        itemCount: order.prepaidCard?.length ?? 0,
+        itemBuilder: (context, index) => OrderProductListItem(
+          card: order.prepaidCard![index],
           onTap: () {
             Get.to(
-              () => const OrderItemDetailsScreen(),
+              () =>  OrderItemDetailsScreen(
+                order: order,
+                cardIndex: index,
+              ),
               transition: Transition.noTransition,
             );
           },

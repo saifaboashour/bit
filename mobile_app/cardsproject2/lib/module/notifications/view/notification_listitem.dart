@@ -1,16 +1,20 @@
+import 'package:cardsproject2/util/formatters/date_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../util/app_colors.dart';
 import '../../../util/common_widgets.dart';
 import '../../../util/text_styles.dart';
+import '../model/notification.dart' as model;
 
 class NotificationListItem extends StatelessWidget {
   const NotificationListItem({
     super.key,
+    required this.notification,
     required this.onTap,
   });
 
+  final model.Notification notification;
   final Function() onTap;
 
   @override
@@ -44,8 +48,17 @@ class NotificationListItem extends StatelessWidget {
                   height: Get.width * 0.2,
                   width: Get.width * 0.2,
                   decoration: BoxDecoration(
-                    color: Colors.amber,
+                    color: AppColors.ligthGrey,
                     borderRadius: BorderRadius.circular(Get.width * 0.01),
+                  ),
+                  child: Image.network(
+                    notification.image ?? '',
+                    errorBuilder: (context, error, stackTrace) => Center(
+                        child: Text(
+                      '404',
+                      style: TextStyles.captionLarge
+                          .copyWith(fontWeight: FontWeight.bold),
+                    )),
                   ),
                 ),
                 CommonWidgets().buildHorizontalSpace(space: 0.02),
@@ -55,12 +68,12 @@ class NotificationListItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Welcome',
+                        notification.title ?? '-',
                         style: TextStyles.captionLarge
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
-                      const Text(
-                        'Welcome to Bitaqty!',
+                      Text(
+                        notification.description ?? '-',
                         style: TextStyles.captionLarge,
                       ),
                     ],
@@ -78,12 +91,14 @@ class NotificationListItem extends StatelessWidget {
                         height: Get.width * 0.02,
                         width: Get.width * 0.02,
                         decoration: BoxDecoration(
-                          color: AppColors.primaryColor,
+                          color: (notification.isRead ?? false)
+                              ? Colors.transparent
+                              : AppColors.primaryColor,
                           borderRadius: BorderRadius.circular(Get.width * 0.02),
                         ),
                       ),
                       Text(
-                        '14-01-2023',
+                        DateHelper().formatDateDMY(notification.createdAt),
                         style: TextStyles.captionLarge
                             .copyWith(color: AppColors.darkGrey),
                       ),

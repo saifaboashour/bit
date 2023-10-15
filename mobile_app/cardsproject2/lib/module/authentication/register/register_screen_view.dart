@@ -23,28 +23,43 @@ class RegisterScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CommonWidgets().buildVerticalSpace(space: 0.02),
-                buildTitleAndSubTitle(),
-                const Spacer(),
-                buildRegisterationProgress(),
-                const Spacer(),
-                Obx(
-                  () => _registerController.registerationProgress == 1
-                      ? buildRegisterFormStepOne()
-                      : buildRegisterFormStepTwo(),
-                ),
-                const Spacer(),
-                buildButton(),
-                CommonWidgets().buildVerticalSpace(space: 0.02),
-                buildSwitchToLogin(),
-                CommonWidgets().buildVerticalSpace(space: 0.05),
-              ],
-            )),
+        child: Column(
+          children: [
+            Obx(() => _registerController.isLoading ? Expanded(
+              flex:1,
+              child: LinearProgressIndicator(
+                color: AppColors.primaryColor,
+                backgroundColor: AppColors.primaryColor.withOpacity(0.5),
+              ),
+            ) : const SizedBox(),
+            ),
+            Expanded(
+              flex: 100,
+              child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CommonWidgets().buildVerticalSpace(space: 0.02),
+                      buildTitleAndSubTitle(),
+                      const Spacer(),
+                      buildRegisterationProgress(),
+                      const Spacer(),
+                      Obx(
+                        () => _registerController.registerationProgress == 1
+                            ? buildRegisterFormStepOne()
+                            : buildRegisterFormStepTwo(),
+                      ),
+                      const Spacer(),
+                      buildButton(),
+                      CommonWidgets().buildVerticalSpace(space: 0.02),
+                      buildSwitchToLogin(),
+                      CommonWidgets().buildVerticalSpace(space: 0.05),
+                    ],
+                  )),
+            ),
+          ],
+        ),
       ),
     );
   }

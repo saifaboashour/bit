@@ -20,16 +20,31 @@ class ForgetPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              buildTitleAndSubTitle(),
-              buildIllistration(),
-              buildForgetPasswordForm(),
-            ],
-          ),
+        child: Column(
+          children: [
+            Obx(() => _loginController.isLoading ? Expanded(
+              flex:1,
+              child: LinearProgressIndicator(
+                color: AppColors.primaryColor,
+                backgroundColor: AppColors.primaryColor.withOpacity(0.5),
+              ),
+            ) : const SizedBox(),
+            ),
+            Expanded(
+              flex: 100,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    buildTitleAndSubTitle(),
+                    buildIllistration(),
+                    buildForgetPasswordForm(),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -49,7 +64,7 @@ class ForgetPasswordScreen extends StatelessWidget {
           children: [
             CommonWidgets().buildHorizontalSpace(space: 0.02),
             Text(
-              "You will recive an email with the instructions\non how to reset your password...",
+              "You will receive an email with the instructions\non how to reset your password...",
               style: TextStyles.bodySmall.copyWith(
                 color: AppColors.darkGrey,
               ),

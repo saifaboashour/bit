@@ -10,7 +10,7 @@ class User {
   final String? commercialName;
   final String? email;
   final String? image;
-  final String? credit;
+  final double? credit;
   final String? isApproved;
   final String? isBlocked;
   final String? canGiveCredit;
@@ -52,7 +52,7 @@ class User {
       commercialName: json['commercial_name'],
       email: json['email'],
       image: json['image'],
-      credit: json['credit'],
+      credit: double.parse("${json['credit']}"),
       isApproved: json['is_approved'],
       isBlocked: json['is_blocked'],
       canGiveCredit: json['can_give_credit'],
@@ -82,9 +82,9 @@ class User {
       'is_email_verified': isEmailVerified,
       'is_phone_verified': isPhoneVerified,
       'vendor': vendor,
-      'country': country,
-      'state': state,
-      'currency': currency,
+      'country': country?.toJson(),
+      'state': state?.toJson(),
+      'currency': currency?.toJson(),
       'group': group,
     };
   }

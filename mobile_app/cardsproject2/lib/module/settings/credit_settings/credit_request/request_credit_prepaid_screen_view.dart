@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../service/local_storage_manager/user_service.dart';
+import '../../../../util/common_widgets.dart';
 import '../../../../util/images_path.dart';
 import '../../../../view/buttons/primary_button.dart';
 import '../../../../view/custom_header.dart';
@@ -12,6 +14,7 @@ class RequestCreditPrepaidScreen extends StatelessWidget {
   });
 
   final CreditSettingsController _creditSettingsController = Get.find();
+  final userService = Get.find<UserService>();
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +22,19 @@ class RequestCreditPrepaidScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            CustomHeader(
-              lable: '98.05 USD',
-              icon: ImagePath.wallet,
-              action: () {},
-              actionIcon: null,
+            Obx(
+                  () => CustomHeader(
+                lable:
+                '${userService.user.credit} ${userService.user.currency?.symbol}',
+                icon: ImagePath.wallet,
+                action: () {},
+                actionIcon: null,
+              ),
             ),
             buildCreditRequestPrepaidForm(),
             const Spacer(),
             buildSaveChangesButton(),
+            CommonWidgets().buildVerticalSpace(space: 0.02),
           ],
         ),
       ),
@@ -53,7 +60,9 @@ class RequestCreditPrepaidScreen extends StatelessWidget {
       child: PrimaryButton(
         label: 'Submit',
         width: 0.9,
-        action: () {},
+        action: () {
+          _creditSettingsController.requestCreditPrepaid();
+        },
       ),
     );
   }

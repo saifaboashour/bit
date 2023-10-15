@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cardsproject2/module/authentication/authentication_repository.dart';
 import 'package:cardsproject2/module/authentication/model/countries_response.dart';
 import 'package:cardsproject2/module/authentication/register/model/register_error.dart';
@@ -24,7 +22,7 @@ class RegisterController extends GetxController {
     super.onInit();
   }
 
-  //Declerations
+  //Declarations
   final Rx<TextEditingController> _fullNameTextFieldController =
       TextEditingController().obs;
   final Rx<TextEditingController> _addressTextFieldController =
@@ -54,6 +52,8 @@ class RegisterController extends GetxController {
   final RxString _selectedCountryValue = 'Loading...'.obs;
   final RxString _selectedStateValue = 'Loading...'.obs;
   final RxString _selectedCurrencyValue = 'Loading...'.obs;
+
+  final RxBool _isLoading = false.obs;
 
   //Getters
   TextEditingController get fullNameTextFieldController =>
@@ -85,6 +85,8 @@ class RegisterController extends GetxController {
   String get selectedCountryValue => _selectedCountryValue.value;
   String get selectedStateValue => _selectedStateValue.value;
   String get selectedCurrencyValue => _selectedCurrencyValue.value;
+
+  bool get isLoading => _isLoading.value;
 
   //Logic
   changeRegisterationProgress(int step) {
@@ -186,8 +188,10 @@ class RegisterController extends GetxController {
   }
 
   register() async {
+    _isLoading.value = true;
     bool isValid = validateForm();
     if (!isValid) {
+      _isLoading.value = false;
       return;
     }
 
@@ -211,12 +215,11 @@ class RegisterController extends GetxController {
     GeneralResponse<RegisterResponse, RegisterError> response =
         await RegisterRepository().registerApi(requestBody);
 
-    log('Response => ${response.success}');
     if (!response.success) {
+      _isLoading.value = false;
       showErrorMessages(response.error);
     } else {
-      log('Otp Token => ${response.data?.otpToken}');
-
+      _isLoading.value = false;
       Get.toNamed(Routes.oneTimePassword,
           parameters: {'token': response.data?.otpToken ?? ''});
     }

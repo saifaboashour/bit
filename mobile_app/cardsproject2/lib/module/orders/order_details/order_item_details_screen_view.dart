@@ -1,8 +1,11 @@
+import 'package:cardsproject2/module/orders/model/order.dart';
 import 'package:cardsproject2/util/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../service/local_storage_manager/user_service.dart';
 import '../../../util/common_widgets.dart';
+import '../../../util/formatters/date_helper.dart';
 import '../../../util/images_path.dart';
 import '../../../view/buttons/primary_button.dart';
 import '../../../view/custom_header.dart';
@@ -10,11 +13,15 @@ import '../../../view/custom_header.dart';
 import 'view/order_item_details_row.dart';
 
 class OrderItemDetailsScreen extends StatelessWidget {
-  const OrderItemDetailsScreen({
+  OrderItemDetailsScreen({
     super.key,
+    required this.order,
+    required this.cardIndex,
   });
 
-  // final OrdersController _ordersController = Get.find();
+ final Order order;
+ final int cardIndex;
+  final userService = Get.find<UserService>();
 
   @override
   Widget build(BuildContext context) {
@@ -53,52 +60,48 @@ class OrderItemDetailsScreen extends StatelessWidget {
               ),
             ),
             CommonWidgets().buildHorizontalSpace(space: 0.02),
-            const Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 OrderItemDetailsRow(
                   title: 'Order ID: ',
-                  value: '4563',
+                  value: '${order.id}',
                   width: 0.4,
                 ),
                 OrderItemDetailsRow(
                   title: 'Operator: ',
-                  value: 'Zain',
+                  value: '${order.type?.name}',
                   width: 0.4,
                 ),
                 OrderItemDetailsRow(
                   title: 'Type: ',
-                  value: 'GSM 1 JD',
+                  value: '${order.category?.name}',
                   width: 0.4,
                 ),
                 OrderItemDetailsRow(
                   title: 'Price: ',
-                  value: '1.95 JOD',
+                  value: '${order.product?.price} ${userService.user.currency?.symbol}',
                   width: 0.4,
                 ),
-                OrderItemDetailsRow(
-                  title: 'Custom Info: ',
-                  value: 'G.......',
-                  width: 0.4,
-                ),
+                buildCustomInfo(),
                 OrderItemDetailsRow(
                   title: 'Device Name: ',
-                  value: 'SM Samsung A23',
+                  value: '${order.deviceName}',
                   width: 0.4,
                 ),
                 OrderItemDetailsRow(
                   title: 'Operation Date: ',
-                  value: '14-01-2023',
+                  value: DateHelper().formatDateDMY(order.createdAt),
                   width: 0.4,
                 ),
                 OrderItemDetailsRow(
                   title: 'Operation Time: ',
-                  value: '10:14 PM',
+                  value: DateHelper().formatDateHM(order.createdAt),
                   width: 0.4,
                 ),
                 OrderItemDetailsRow(
                   title: 'Status: ',
-                  value: 'Pending',
+                  value: '${order.status}',
                   width: 0.4,
                   valueColor: AppColors.darkGrey,
                 ),
@@ -108,6 +111,47 @@ class OrderItemDetailsScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  buildCustomInfo(){
+    return  Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children:  order.type?.id == 1 ? [
+        OrderItemDetailsRow(
+          title: 'Card Number 1: ',
+          value: '${order.prepaidCard?[cardIndex].number1}',
+          width: 0.4,
+        ),
+        OrderItemDetailsRow(
+          title: 'Card Number 2: ',
+          value: '${order.prepaidCard?[cardIndex].number2}',
+          width: 0.4,
+        ),
+        OrderItemDetailsRow(
+          title: 'Serial Number 1: ',
+          value: '${order.prepaidCard?[cardIndex].serial1}',
+          width: 0.4,
+        ),
+        OrderItemDetailsRow(
+          title: 'Serial Number 2: ',
+          value: '${order.prepaidCard?[cardIndex].serial2}',
+          width: 0.4,
+        ),
+        OrderItemDetailsRow(
+          title: 'CVC: ',
+          value: '${order.prepaidCard?[cardIndex].cvc}',
+          width: 0.4,
+        ),
+        OrderItemDetailsRow(
+          title: 'Expiration Date: ',
+          value: '${order.prepaidCard?[cardIndex].expirationDate}',
+          width: 0.4,
+        ),
+      ] : (order.product?.inputFields?.map((inputField) => OrderItemDetailsRow(
+        title: '${inputField.name}: ',
+        value: '${inputField.answer}',
+        width: 0.4,
+      )).toList() ?? []));
   }
 
   buildPrintButton() {

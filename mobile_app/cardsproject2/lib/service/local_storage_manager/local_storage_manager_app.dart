@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cardsproject2/module/authentication/one_time_password/model/otp_reponse.dart';
 import 'package:cardsproject2/service/navigation/services/authentication_service.dart';
 import 'package:get/get.dart';
@@ -10,7 +8,7 @@ import '../../module/authentication/model/user.dart';
 class LocalStorageManagerApp {
   final storageReference = GetStorage();
 
-  //Fisrt Time To Use The Application
+  //First Time To Use The Application
   saveFirstTimeToUseTheApp(bool isFirstTime) async {
     await storageReference.write("isFirstTime", isFirstTime);
   }
@@ -23,7 +21,7 @@ class LocalStorageManagerApp {
   //Authentication
   saveUserTokens(OtpResponse? tokens) async {
     if (tokens != null) {
-      await storageReference.write("tokens", tokens);
+      await storageReference.write("tokens", tokens.toJson());
       AuthenticationService authenticationService = Get.find();
       authenticationService.checkLoginStatus();
     }
@@ -36,19 +34,17 @@ class LocalStorageManagerApp {
   }
 
   OtpResponse? getUserTokens() {
-    log('${storageReference.read("tokens")}');
-    try {
-      OtpResponse? tokens =
-          OtpResponse.fromJson(storageReference.read("tokens"));
-      return tokens;
-    } catch (e) {
-      return storageReference.read("tokens");
+    var tokens = storageReference.read<Map<String, dynamic>>("tokens");
+    if (tokens != null) {
+      return OtpResponse.fromJson(tokens);
+    } else {
+      return null;
     }
   }
 
   //User
   saveUser(User user) async {
-    await storageReference.write("user", user);
+    await storageReference.write("user", user.toJson());
   }
 
   removeUser() async {
@@ -56,11 +52,20 @@ class LocalStorageManagerApp {
   }
 
   User? getUser() {
-    try {
-      User? user = User.fromJson(storageReference.read("user"));
-      return user;
-    } catch (e) {
-      return storageReference.read("user");
+    var user = storageReference.read<Map<String, dynamic>>("user");
+    if (user != null) {
+      return User.fromJson(user);
+    } else {
+      return null;
     }
+  }
+
+  //App Language
+  saveAppLanguage(String lang) {
+    storageReference.write('language', lang);
+  }
+
+  String getAppLanguage() {
+    return storageReference.read('language') ?? "English";
   }
 }

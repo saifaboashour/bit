@@ -4,12 +4,9 @@ import 'package:get/get.dart';
 import '../../local_storage_manager/local_storage_manager_app.dart';
 
 class AuthenticationService extends GetxService {
-  Future<AuthenticationService> init() async => this;
-
-  @override
-  void onInit() {
-    checkLoginStatus();
-    super.onInit();
+  Future<AuthenticationService> init() async {
+    await checkLoginStatus();
+    return this;
   }
 
   final RxBool _isLoggedIn = false.obs;

@@ -3,14 +3,18 @@ import 'package:get/get.dart';
 
 import '../../../../../util/app_colors.dart';
 import '../../../../../util/common_widgets.dart';
+import '../../../../../util/formatters/date_helper.dart';
 import '../../../../../util/text_styles.dart';
+import '../model/credit_transaction.dart';
 
 class CreditRequestListItem extends StatelessWidget {
   const CreditRequestListItem({
     super.key,
+    required this.creditTransaction,
     required this.onTap,
   });
 
+  final CreditTransaction creditTransaction;
   final Function() onTap;
 
   @override
@@ -44,8 +48,13 @@ class CreditRequestListItem extends StatelessWidget {
                   height: Get.width * 0.2,
                   width: Get.width * 0.2,
                   decoration: BoxDecoration(
-                    color: Colors.amber,
+                    color: AppColors.ligthGrey,
                     borderRadius: BorderRadius.circular(Get.width * 0.01),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      creditTransaction.transactionType == "Deposit"? Icons.arrow_downward : Icons.arrow_upward,
+                    ),
                   ),
                 ),
                 CommonWidgets().buildHorizontalSpace(space: 0.02),
@@ -79,23 +88,23 @@ class CreditRequestListItem extends StatelessWidget {
                 ),
                 SizedBox(
                   height: Get.height * 0.08,
-                  child: const Column(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'data',
+                        '${creditTransaction.id}',
                         style: TextStyles.captionLarge,
                       ),
                       Text(
-                        'data',
+                        '${creditTransaction.amount}',
                         style: TextStyles.captionLarge,
                       ),
                       Text(
-                        'data',
+                        '${creditTransaction.transactionType}',
                         style: TextStyles.captionLarge,
                       ),
                       Text(
-                        'data',
+                        '${creditTransaction.status}',
                         style: TextStyles.captionLarge,
                       ),
                     ],
@@ -103,13 +112,13 @@ class CreditRequestListItem extends StatelessWidget {
                 ),
                 const Spacer(),
                 SizedBox(
-                  height: Get.height * 0.1,
+                  height: Get.height * 0.11,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Text(
-                        '14-01-2023',
+                      DateHelper().formatDateDMY(creditTransaction.dateTime),
                         style: TextStyles.captionLarge
                             .copyWith(color: AppColors.darkGrey),
                       ),

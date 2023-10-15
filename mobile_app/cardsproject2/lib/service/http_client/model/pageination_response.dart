@@ -18,7 +18,9 @@ class PaginationResponse<T> {
       });
     }
     return PaginationResponse(
-        data: tmpList, meta: MetaData.fromJson(json['meta']));
+      data: tmpList,
+      meta: MetaData.fromJson(json['meta']),
+    );
   }
 }
 

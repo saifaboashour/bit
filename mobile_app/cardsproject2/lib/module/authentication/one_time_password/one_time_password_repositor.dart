@@ -16,6 +16,7 @@ class OneTimePasswordRepository {
     final response = await _httpClient.post(
       path,
       requestBody,
+      [],
       isAuthRequired: false,
     );
     return response;

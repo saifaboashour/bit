@@ -3,18 +3,11 @@ import 'package:cardsproject2/util/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../service/local_storage_manager/user_service.dart';
+import '../../service/navigation/routes.dart';
+import '../../util/app_colors.dart';
 import '../../util/images_path.dart';
 import '../../view/custom_header.dart';
-import 'account_settings/change_password_screen_view.dart';
-import 'account_settings/edit_profile_screen_view.dart';
-import 'app_settings/language/change_language_screen_view.dart';
-import 'app_settings/printers/manage_printers_screen_view.dart';
-import 'credit_settings/change_currency/change_currency_screen_view.dart';
-import 'credit_settings/credit_history/credit_request_history_screen_view.dart';
-import 'credit_settings/credit_request/credit_request_screen_view.dart';
-import 'help/privacy_policy_screen_view.dart';
-import 'help/support_screen_view.dart';
-import 'help/terms_and_conditions_screen_view.dart';
 import 'settings_controller.dart';
 import 'view/settings_button.dart';
 
@@ -24,6 +17,7 @@ class SettingsScreen extends StatelessWidget {
   });
 
   final SettingsController _settingsController = Get.put(SettingsController());
+  final userService = Get.find<UserService>();
 
   @override
   Widget build(BuildContext context) {
@@ -55,12 +49,14 @@ class SettingsScreen extends StatelessWidget {
       padding: EdgeInsets.all(Get.width * 0.02),
       child: Row(
         children: [
-          Container(
-            height: Get.width * 0.25,
-            width: Get.width * 0.25,
-            decoration: BoxDecoration(
-              color: Colors.amber,
-              borderRadius: BorderRadius.circular(Get.width * 0.01),
+          Obx(() =>  Container(
+              height: Get.width * 0.25,
+              width: Get.width * 0.25,
+              decoration: BoxDecoration(
+                color: AppColors.ligthGrey,
+                borderRadius: BorderRadius.circular(Get.width * 0.01),
+              ),
+              child: Image.network('${userService.user.image}',errorBuilder: (context,_,e) => const SizedBox(),),
             ),
           ),
           CommonWidgets().buildHorizontalSpace(space: 0.02),
@@ -69,11 +65,11 @@ class SettingsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${_settingsController.user.commercialName}',
+                  '${userService.user.commercialName}',
                   style: TextStyles.captionLarge,
                 ),
                 Text(
-                  '${_settingsController.user.email}',
+                  '${userService.user.email}',
                   style: TextStyles.captionSmall,
                 ),
               ],
@@ -99,20 +95,14 @@ class SettingsScreen extends StatelessWidget {
             title: 'Edit Profile',
             icon: ImagePath.editProfile,
             onTap: () {
-              Get.to(
-                () => EditProfileScreen(),
-                transition: Transition.noTransition,
-              );
+              Get.toNamed(Routes.editProfile);
             },
           ),
           SettingsButton(
             title: 'Change Password',
             icon: ImagePath.changePassword,
             onTap: () {
-              Get.to(
-                () => ChangePasswordScreen(),
-                transition: Transition.noTransition,
-              );
+              Get.toNamed(Routes.changePassword);
             },
           ),
         ],
@@ -135,30 +125,21 @@ class SettingsScreen extends StatelessWidget {
             title: 'Request Credit',
             icon: ImagePath.creditCard,
             onTap: () {
-              Get.to(
-                () => const RequestCreditScreen(),
-                transition: Transition.noTransition,
-              );
+              Get.toNamed(Routes.requestCredit);
             },
           ),
           SettingsButton(
             title: 'Credit History',
             icon: ImagePath.creditHistory,
             onTap: () {
-              Get.to(
-                () => const CreditRequestHistoryScreen(),
-                transition: Transition.noTransition,
-              );
+              Get.toNamed(Routes.creditHistory);
             },
           ),
           SettingsButton(
             title: 'Change Currency',
             icon: ImagePath.changeCurrency,
             onTap: () {
-              Get.to(
-                () => const ChangeCurrencyScreen(),
-                transition: Transition.noTransition,
-              );
+              Get.toNamed(Routes.changeCurrency);
             },
           ),
         ],
@@ -181,20 +162,14 @@ class SettingsScreen extends StatelessWidget {
             title: 'Change Language',
             icon: ImagePath.changeLanguage,
             onTap: () {
-              Get.to(
-                () => const ChangeLanguageScreen(),
-                transition: Transition.noTransition,
-              );
+              Get.toNamed(Routes.changeLanguage);
             },
           ),
           SettingsButton(
             title: 'Manage Printers',
             icon: ImagePath.printer,
             onTap: () {
-              Get.to(
-                () => const ManagePrintersScreen(),
-                transition: Transition.noTransition,
-              );
+              Get.toNamed(Routes.managePrinters);
             },
           ),
         ],
@@ -217,30 +192,21 @@ class SettingsScreen extends StatelessWidget {
             title: 'Support',
             icon: ImagePath.support,
             onTap: () {
-              Get.to(
-                () => const SupportScreen(),
-                transition: Transition.noTransition,
-              );
+              Get.toNamed(Routes.support);
             },
           ),
           SettingsButton(
             title: 'Privacy Policy',
             icon: ImagePath.privacyPolicy,
             onTap: () {
-              Get.to(
-                () => const PrivacyPolicyScreen(),
-                transition: Transition.noTransition,
-              );
+              Get.toNamed(Routes.privacyPolicy);
             },
           ),
           SettingsButton(
             title: 'Terms & Conditions',
             icon: ImagePath.termAndCondition,
             onTap: () {
-              Get.to(
-                () => const TermsAndConditionsScreen(),
-                transition: Transition.noTransition,
-              );
+              Get.toNamed(Routes.termsAndConditions);
             },
           ),
         ],
